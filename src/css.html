@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+@@include('html/head.html', {
+"title": "css"
+})
+
+<body>
+  <div class="wrapper">
+
+    @@include('html/header.html', {})
+
+    <main class="page--main">
+
+      <section class="css">
+        <div class="container">
+
+          <h1>css</h1>
+
+
+          <section class="fit-content">
+            <h4><code>margin: 0 auto; </code>у всех элементов</h4>
+            <div class="fit-content__inner">
+
+              <div class="fit-content__one">
+                <p><code>100px</code></p>
+                <p>Lorem ipsum dolor sit amet, consecteturconsectetur adipisicing elit. Natus, nesciunt?</p>
+              </div>
+              <div class="fit-content__two">
+                <p><code>min-content</code></p>
+                <p>secteturconsecteturt. Самый длинный элемент определяет ширину контейнера</p>
+              </div>
+              <div class="fit-content__three">
+                <p><code>max-content</code></p>
+                <p>Lorem ipsum dolor sit amet, consecteturconsectetur adipisicing elit. Natus, nesciunt?</p>
+              </div>
+              <div class="fit-content__three">
+                <p><code>max-content</code></p>
+                <p>Lorem adipisicing elit. Natus, nesciunt?</p>
+                <p>margin: 0 auto;</p>
+              </div>
+              <div class="fit-content__four">
+                <p><code>fit-content</code></p>
+                <p>Lorem ipsum dolor sit amet, consecteturconsectetur adipisicing elit. Natus, nesciunt?</p>
+              </div>
+              <div class="fit-content__five">
+                <p><code>fit-content</code></p>
+                <p>Lorem ipsum dolor elit.</p>
+              </div>
+            </div>
+
+          </section>
+
+          <div class="performance">
+            <h2>Приоритет</h2>
+            <pre>
+  <code>
+&lt;div id="floor"&gt;
+  &lt;span class="cat-in-box"&gt;&lt;/span&gt;
+&lt;/div&gt;
+
+span { 6 }
+div span { 5 }
+#floor .cat-in-box { 4 }
+.cat-in-box { 3 }
+#floor span { 2 }
+div .cat-in-box { 1 }
+  </code>
+</pre>
+          </div>
+
+          <section class="transform">
+
+            <details class="show-block transform">
+              <summary><code>transform</code></summary>
+
+
+              <div class="translate">
+                <div>translate(x, y, z);</div>
+                <div>-10px, 0px</div>
+                <div>0px, -10px</div>
+                <div>translate3d(0px, 0px, 10px);</div>
+              </div>
+              <div class="rotate">
+                <div>rotate(x, y, z);</div>
+                <div>15deg</div>
+                <div>-40deg</div>
+                <div>90deg</div>
+                <div>-90deg</div>
+              </div>
+              <div class="skew">
+                <div>skew(x, y)</div>
+                <div>10deg</div>
+                <div>0, -10deg</div>
+                <div>-50deg, 0</div>
+              </div>
+              <div class="scale">
+                <div>scale(px);</div>
+                <div>-1</div>
+                <div>2</div>
+                <div>scaleX(2)</div>
+                <div>scaleY(2)</div>
+                <div>0.5</div>
+              </div>
+              <div class="matrix">
+                <div>matrix</div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+
+            </details>
+          </section>
+
+          <section class="css__background">
+
+            <details class="show-block background">
+              <summary><code>background</code></summary>
+
+
+
+
+              <div class="performance">
+                <p>background: color image position/size repeat origin clip attachment;</p>
+                <p>background: url("../image/examples-burger-svg.svg") no-repeat 0 0 / cover;</p>
+              </div>
+
+
+              <details class="show-piece background-position">
+                <summary><code>background-position</code></summary>
+                <pre>
+  <code>
+background-position: 50px 100px;
+background-position: 50% 25%;
+background-position: right bottom;
+background-position: right 30px bottom 60px; 
+  </code>
+</pre>
+              </details>
+
+              <details class="show-piece background-size">
+                <summary><code>background-size</code></summary>
+                <p>contain -- расширяется во все стороны пока не упрётся в край блока с какой нибудь стороны</p>
+                <p>cover -- пропорции изображения сохраняются;</p>
+              </details>
+
+              <details class="show-piece background-repeat">
+                <summary><code>background-repeat</code></summary>
+                <p>repeat / repeat-x / repeat-y / no-repeat</p>
+
+                <p>background-repeat: round repeat -- повторяющиеся картинки по краям блока обрезаться не будут</p>
+                <p>background-repeat: space repeat -- Режим повторения фона background-repeat: space похож на round, при
+                  нём
+                  части картинки тоже не обрезаются. Отличие в том,
+                  что повторяющиеся фоновые картинки не сжимаются или растягиваются, а для компенсации ширины блока
+                  между
+                  ними добавляется
+                  пустое пространство.</p>
+                <p>background-repeat: space</p>
+              </details>
+
+              <details class="show-piece background-attachment">
+                <summary><code>background-attachment</code></summary>
+                <p>background-attachment: scroll(default) / fixed — фон не прокручивается, зафиксирован на одном месте.
+                </p>
+              </details>
+
+              <details class="show-piece background-origin">
+                <summary><code>background-origin</code></summary>
+                <p>background-origin: padding-box / border-box / content-box -- расположение и размеры области
+                  отображения
+                  фонового изображения</p>
+                <img src="img/background-origin.avif" alt="">
+                <p>Значение по умолчанию — padding-box. При этом значении область отображения фонового изображения
+                  соответствует внутренней
+                  области блока, не включая рамки.</p>
+                <p>content-box область отображения соответствует только области содержимого, не включая рамки и
+                  внутренние
+                  отступы.</p>
+                <p>border-box область отображения соответствует полному размеру блока, включая и рамки. Фоновое
+                  изображение
+                  начинается от
+                  внешнего края блока и закрывается рамками, если они заданы.</p>
+              </details>
+
+              <details class="show-piece ">
+                <summary><code>background-clip</code></summary>
+                <p>управляет тем, как обрезается фон. Причём обрезаются не только фоновые изображения, но и фоновый
+                  цвет.
+                </p>
+
+                <img src="img/background-origin.avif" alt="">
+
+                <p>border-box задано по умолчанию, при этом фоновое изображение совсем не обрезается.</p>
+                <p>padding-box обрежет фон по внутреннему краю области рамки.</p>
+                <p>content-box обрежет фон по краю области содержимого.</p>
+              </details>
+
+
+
+
+
+              <h2>Множественные фоны</h2>
+              <p>пути к изображениям background перечисляются через запятую</p>
+              <pre>
+  <code>
+img {
+  background-color: #ffffff;
+  background-image: url("img/glasses.svg"), url("img/keks.jpg");
+  background-position: 75px 125px, center;  
+  background-clip: padding-box;
+  background-origin: border-box;
+  background-size: 150px, cover;    размер первой будет 150px а второй cover
+  background-repeat: no-repeat;
+}
+  </code>
+                </pre>
+              <p>Значения других свойств изображений тоже задаются через запятую. Порядок значений должен
+                соответствовать порядку фоновых картинок.</p>
+
+              <details class="show-piece image-set">
+                <summary><code>image-set</code> -- несколько фонов</summary>
+                <p>несколько изображений</p>
+                <pre>
+  <code>
+element {
+  background-image: image-set(
+    small-image.png 1x,
+    medium-image.png 2x,
+    large-image.png 3x
+  );
+}
+  </code>
+</pre>
+              </details>
+
+
+            </details>
+
+          </section>
+
+          <section class="css__border">
+            <details class="show-block border">
+              <summary><code>border</code></summary>
+
+
+              <p>border: width / style / color</p>
+              <ul>
+                <li>border-top-left-radius</li>
+                <li>border-top-right-radius</li>
+                <li>border-bottom-right-radius</li>
+                <li>border-bottom-left-radius</li>
+              </ul>
+              <pre>
+  <code>
+      Разные горизонтальные и вертикальные радиусы:
+border-radius: 10px 20px 30px 40px / 5px 15px 25px 35px;
+  </code>
+</pre>
+
+
+
+
+              <h2>border-image-source</h2>
+              <p>Изображение рамки</p>
+              <img src="img/border-image-slice.avif" alt="">
+              <p>Каждая рамка имеет 9 областей: 4 угла, 4 стороны и центральную область. Для заполнения этих областей
+                браузер должен
+                нарезать картинку для рамки на 9 частей. Когда браузер не знает, как это сделать, он просто размещает
+                картинку по углам</p>
+              <p>Свойство border-image-slice задаёт отступы от краёв картинки до четырёх линий, которые «разрезают» её
+                на
+                части, как на
+                схеме справа. Если эти отступы небольшие, то получается «нарезка» из 9 частей, которые затем размещаются
+                в
+                соответствующих областях рамки.</p>
+              <p>Но если отступы слишком большие (больше половины картинки), то браузер не может получить 9 частей и
+                располагает то, что
+                отрезалось по углам.</p>
+              <p>Значение свойства можно задавать числом без единицы измерения (оно обычно обозначает пиксели) или в
+                процентах
+                (относительно размера самой картинки).</p>
+              <pre>
+  <code>
+border-image-slice: 60;
+border-image-slice: 10%;
+  </code>
+</pre>
+
+            </details>
+          </section>
+
+          <section class="css__outline">
+
+            <details class="show-block outline">
+              <summary><code>outline</code></summary>
+
+              <p>внешней рамке нельзя задать параметры отдельных сторон.</p>
+              <pre>
+            <code>
+          outline-width: 10px;
+          outline-style: solid;
+          outline-color: black;
+            </code>
+          </pre>
+              <p>outline-offset -- изменяет расположение рамки</p>
+              <p>не влияет на его размер и не занимает места, то есть отображается над другими элементами.</p>
+
+            </details>
+          </section>
+
+          <section class="box-shadow"> 
+            <details class="show-block">
+              <summary><code>box-shadow</code></summary>
+
+              <p>Тень в реальном мире редко бывает просто черной, она обычно содержит в себе оттенок основного цвета
+                обьекта. Такие тени
+                смотрятся органично.</p>
+              <p>Если какой-то параметр тени не указан, значит он равен 0.</p>
+              <p>рамки увеличивают размер элемента, а тени — нет.</p>
+
+
+              <pre>
+  <code>
+box-shadow: inset? h-offset v-offset blur-radius spread-distance color;
+
+[inset] — внутренняя
+[5px] — смещение по x
+[10px] — смещение по y
+[2px] — размытие
+[3px] — растяжение
+[red]; — цвет
+  </code>
+</pre>
+
+              <h3>Множественные тени</h3>
+              <p>тени выстраиваются в стек в обратном порядке и отрисовываются, начиная с последней, причем каждая из
+                них применяется к
+                исходному объекту так, как будто есть только она.</p>
+
+              <button class="box-shadow__button-one">button</button>
+              <button class="box-shadow__button-two">в разных направлениях</button>
+              <button class="box-shadow__button-three">внутренние и внешние</button>
+              <button class="box-shadow__button-four">продвинутое подчеркивание</button>
+
+              <details class="show-piece">
+                <summary><code>Смягчение теней с помощью слоёв</code></summary>
+                <p><a class="shadow__link" href="https://xhtml.ru/2021/css/layered-smooth-box-shadows/">Смягчение
+                    теней с помощью слоёв в CSS-свойстве box-shadow</a></p>
+                <p>Если увеличивать количество слоев, нужно уменьшить значение прозрачности для каждого слоя, чтобы
+                  плотность тени оставалась примерно такой же.</p>
+
+                <button class="shadow-softening__one">4 слоя с прозрачностью 15%</button>
+                <button class="shadow-softening__two">6 слоёв с прозрачностью 11%</button>
+                <p>Можно смелее увеличивать размытие, чтобы расширить распространение и ещё больше смягчить эффект тени:
+                </p>
+                <button class="shadow-softening__three">становится ещё мягче с увеличением шага изменения
+                  прозрачности</button>
+                <p>можно управлять длиной тени</p>
+                <button class="shadow-softening__four">короткая тень с меньшим расстоянием</button>
+                <button class="shadow-softening__five">длинная тень с большим расстоянием</button>
+              </details>
+
+
+            </details>
+          </section>
+
+          <section class="css__selectors">
+            <details class="show-block selectors">
+              <summary><code>Выбор элементов</code></summary>
+
+              <section class="performance elements-selection">
+
+                <details class="show-piece">
+                  <summary><code>footer ul span { ... }</code> -- контекстные (вложенные)</summary>
+                  <p>только если он вложен в нужный элемент.</p>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>li.one ~ li.six { ... }</code> -- родственный</summary>
+                  <p>Оба элемента должны принадлежать одному родителю.</p>
+                  <p>Отличие от соседнего селектора состоит в том, что между
+                    элементами селектор1 и селектор2 могут находиться
+                    другие элементы.</p>
+                  <pre>
+  <code>
+h1 ~ p { color: red; }
+
+&lt;h1&gt;Заголовок&lt;/g1&gt;
+&lt;p&gt;Абзац 1&lt;/p&gt;    //red
+&lt;p&gt;&gt;Абзац 2&lt;/p&gt;   //red
+&lt;div&gt;
+  &lt;p&gt;Абзац 3&lt;/p&gt;  // тут не выберет(не имеет общего родителя h1)
+&lt;div&gt;
+&lt;p&gt;&gt;Абзац 4&lt;/p&gt;   //red
+  </code>
+</pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>ul &lt; li &lt; span { ... }</code> -- дочерние</summary>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>li.one + li { ... }</code> -- соседние</summary>
+                  <p>соседние по отношению друг к другу</p>
+                  <pre>
+  <code>
+&lt;p&gt;Lorem &lt;b&gt;ipsum &lt;/b&gt; dolor sit amet, &lt;i&gt;consectetuer&lt;/i&gt; adipiscing &lt;tt&gt;elit&lt;/tt&gt;.&lt;/p&gt;
+
+<p>Соседними здесь являются теги &lt;b&gt; и &lt;i&gt;, а также &lt;i&gt; и &lt;tt&gt;. При этом &lt;b&gt; и &lt;tt&gt; к
+соседним элементам не относятся из-за того, что между ними расположен контейнер &lt;i&gt;.</p>
+  </code>
+</pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>.class.class2</code> -- oбъединение селекторов / классов</summary>
+                  <p>слитно без пробелов, выберет элемент с двумя классами одновременно, обьеденять можно большн двух
+                  </p>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>input[checked] { ... }</code> -- cелекторы атрибутов</summary>
+                  <p>cелекторы атрибутов</p>
+                  <pre>
+  <code>
+input[checked] { ... }
+input[type="text"] { ... }   
+details[open] &gt; summary { ... }
+  </code>
+</pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>:empty</code> -- нет дочерних элементов</summary>
+                  <p>выбирает те теги, у которых нет дочерних элементов в том числе текстовых.</p>
+                  <pre>
+              <code>
+            ul li:empty { ... } // все пустые элементы li внутри ul
+              </code>
+            </pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>:only-child</code> -- единственный дочерний элемент</summary>
+                  <p>единственный дочерний элемент внутри родительского контейнера.</p>
+                  <pre>
+              <code>
+            li:only-child { ... } // когда этот li в списке единственный
+              </code>
+            </pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>::first-line</code> -- первая строка текста</summary>
+
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>::first-letter</code> -- первый символ в тексте</summary>
+
+                </details>
+
+              </section>
+
+              <section class="performance search">
+                <h3>Поиск по значениям атрибутов (cелекторы атрибутов)</h3>
+
+                <details class="show-piece">
+                  <summary><code>[foo="bar"]</code> -- полное совпадение</summary>
+                  <p>все элементы, у которых значение атрибута foo полностью совпадает со значением bar</p>
+                  <pre>
+  <code>
+input[checked] { ... }
+input[type="text"] { ... }
+details[open] &gt; summary { ... }
+  </code>
+</pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>[foo^="bar"]</code> -- поиск в начале строки</summary>
+                  <p>выберет все элементы, у которых значение атрибута foo начинается с подстроки bar.</p>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>[href$=".pdf"]</code> -- поиск в конце строки</summary>
+                  <p>выбирает все элементы, значение атрибута href которых оканчивается строкой .pdf.</p>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code></code>[foo*="bar"] -- поиск подстроки везде</summary>
+                  <p>все элементы, у которых значение атрибута foo содержит подстроку bar на любой позиции</p>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>[foo|="bar"]</code> -- поиск по префиксу</summary>
+                  <p>все элементы, у которых значение атрибута foo содержит префикс bar, то есть
+                    либо полностью совпадает с bar, либо начинается со строки bar- (наличие знака переноса существенно).
+                    Другими словами, используя уже знакомые записи селекторов, этот можно заменить на два:</p>
+                  <pre>
+  <code>
+[foo="bar"] — все элементы, у которых значение атрибута foo полностью совпадает со значением bar
+
+[foo^="bar-"] — все элементы, у которых значение атрибута foo начинается со значения bar-
+  </code>
+</pre>
+                </details>
+
+              </section>
+
+              <section class="performance search">
+                <h3>Поиск слов внутри строки</h3>
+                <details class="show-piece">
+                  <summary><code>[value~="Регистрозависим"] / [value~="регистрозависим"]</code> </summary>
+                  <p>Такой селектор выберет все элементы, у которых значение атрибута value содержит слово
+                    регистрозависим
+                    или Регистрозависим.</p>
+                  <p>Входить должно именно слово, а не подстрока. То есть вхождение bar должно содержать с обеих сторон
+                    разделители: пробелы или начало / конец строки.</p>
+                </details>
+
+
+
+              </section>
+
+
+            </details>
+          </section>
+
+          <section class="css__pseudo-classes">
+            <details class="show-block pseudo-classes" open>
+              <summary><code>Псевдо классы</code></summary>
+
+              <article>
+                <pre>
+  <code>
+input[type="checkbox"]:required:checked {}
+
+В данном примере будут выбраны все чекбоксы, которые 
+являются обязательными для заполнения и включены по умолчанию
+  </code>
+</pre>
+              </article>
+
+              <h2>has</h2>
+              <p><code>.card:not(:has(+.card)) </code>//все .card за которыми нет .card</p>
+
+              <details class="show-piece enabled-disabled">
+                <summary><code>enabled / disabled</code> -- обратиться к доступным / недоступным элементам </summary>
+                <p>Заблокированными считаются элементы форм, у которых установлен атрибут disabled.
+                </p>
+                <pre>
+  <code>
+input:enabled { ... }   -- обратиться к доступным элементам
+input:disabled { ... }  -- обратиться к заблокированным элементам
+  </code>
+</pre>
+              </details>
+
+              <details class="show-piece read-only-read-write">
+                <summary><code>read-only / read-write</code> -- запретить редактирование полей</summary>
+                <p>есть разные способы запретить редактирование пользователем полей. Одним из таковых установка
+                  атрибута readonly.
+                  Значение в данном случае доступно для чтения и копирования, но недоступно для редактирования.</p>
+
+                <p>В зависимости от этого параметра существует два селектора, которые позволяют выбирать каждую группу
+                  полей:</p>
+                <pre>
+  <code>
+input:read-only выберет все поля, доступные только для чтения.
+input:read-write выберет все поля без атрибута readonly, даже если у них есть атрибут disabled.
+
+браузер не поддерживает такие селекторы:
+
+input[readonly] {} /* аналог :read-only */
+input:not([readonly]) {} /* аналог :read-write */
+
+Однако,  input:not([readonly]) помимо
+доступных для редактирования текстовых полей выберет кнопки и
+другие нетекстовые поля input, например, input[type="submit"].
+  </code>
+</pre>
+              </details>
+
+              <details class="show-piece requied">
+                <summary><code>requied</code> -- поля обязательные для заполнения</summary>
+                <pre>
+  <code>
+input:required { ... }
+  </code>
+</pre>
+              </details>
+
+              <details class="show-piece optional">
+                <summary><code>optional</code> -- поля НЕобязательные для заполнения</summary>
+                <pre>
+  <code>
+input[type="text"]:optional {}  // все элементы, у которых НЕ указан атрибут required
+  </code>
+</pre>
+              </details>
+
+              <details class="show-piece checked">
+                <summary><code>checked</code></summary>
+                <p>обратиться ко всем элементам input с типами checkbox или radio, которые являются
+                  выбранными(отмеченными)</p>
+                <pre>
+  <code>
+input:checked ~ label { ... }
+  </code>
+</pre>
+              </details>
+
+              <details class="show-piece invalid-valid">
+                <summary><code>invalid / valid</code></summary>
+                <p><code>:valid -- </code>выберет все элементы, у которых введенное значение удовлетворяет требованиям.
+                </p>
+                <p><code>:invalid -- </code>соответственно выберет элементы, у которых введенное значение некорректно.
+                </p>
+              </details>
+
+              <details class="show-piece in-range-out-of-range">
+                <summary><code>in-range / out-of-range</code></summary>
+                <p>Специальный тип поля для ввода числовых значений <code>&lt;input type="number"&gt;</code> . У этого
+                  поля можно определить максимальное и
+                  минимальное значение при помощи атрибутов max и min соответственно.</p>
+                <p><code>:in-range -- </code>все элементы, значение которых попадает в указанный диапазон.</p>
+                <p><code>:out-of-range -- </code>выбирает все элементы, значение которых НЕ попадает в указанный
+                  диапазон.</p>
+              </details>
+
+              <details class="show-piece first-child">
+                <summary><code>first-child</code> -- первый дочерний элемент в родителе</summary>
+
+              </details>
+
+              <details class="show-piece">
+                <summary><code>first-of-type</code></summary>
+                <p>первый среди всех дочерних элементов в своем родителе.</p>
+              </details>
+
+              <details class="show-piece last-of-type">
+                <summary><code>last-of-type</code></summary>
+                <p>последний дочерний элемент родителя с учетом типа.</p>
+              </details>
+
+              <details class="show-piece nth-child">
+                <summary><code>nth-child</code></summary>
+
+                <div class="nth-child">
+                  <table class="nth-child__table">
+                    <caption>nth-child</caption>
+
+                    <tbody>
+                      <tr class="nth-child__tr-1">
+                        <th>:first-child</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-2">
+                        <th>:last-child</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-3">
+                        <th>:nth-child(2)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-4">
+                        <th>:nth-last-child(2)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-5">
+                        <th>:nth-child(odd)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-6">
+                        <th>:nth-child(even)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-7">
+                        <th>:nth-child(2n)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-8">
+                        <th>:nth-child(n+3)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-9">
+                        <th>:nth-child(-n+3)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-10">
+                        <th>:nth-child(3n-1)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-11">
+                        <th>:nth-child(4n-1)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                      <tr class="nth-child__tr-12">
+                        <th>:nth-child(4n)</th>
+                        <td>
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                          <span>6</span>
+                          <span>7</span>
+                          <span>8</span>
+                          <span>9</span>
+                          <span>10</span>
+                          <span>11</span>
+                          <span>12</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="nth-child__how">
+                    <p>how it works?</p>
+
+                    <div class="nth-child__item">
+                      <p>( n + 3 )</p>
+                      <ul>
+                        <li>n = 0 =&gt; ( 0 + 3 ) = 3-й элемент</li>
+                        <li>n = 1 =&gt; ( 1 + 3 ) = 4-й элемент</li>
+                        <li>n = 2 =&gt; ( 2 + 3 ) = 5-й элемент</li>
+                        <li>n = 3 =&gt; ( 3 + 3 ) = 6-й элемент</li>
+                        <li>n = 4 =&gt; ( 4 + 3 ) = 7-й элемент</li>
+                      </ul>
+                    </div>
+
+                    <div class="nth-child__item">
+                      <p>( -n + 3 )</p>
+                      <ul>
+                        <li>n = -0 =&gt; ( -0 + 3 ) = 3-й элемент</li>
+                        <li>n = -1 =&gt; ( -1 + 3 ) = 2-й элемент</li>
+                        <li>n = -2 =&gt; ( -2 + 3 ) = 1-й элемент</li>
+                        <li>n = -3 =&gt; ( -3 + 3 ) = 0-й элемент</li>
+                        <li>n = -4 =&gt; ( -4 + 3 ) = -1-й элемент</li>
+                      </ul>
+                    </div>
+
+                    <div class="nth-child__item">
+                      <p>( 4n - 1 )</p>
+                      <ul>
+                        <li>n = 0 =&gt; ( 4 * 0 - 1 ) = -1-й элемент</li>
+                        <li>n = 1 =&gt; ( 4 * 1 - 1 ) = 3-й элемент</li>
+                        <li>n = 2 =&gt; ( 4 * 2 - 1 ) = 7-й элемент</li>
+                        <li>n = 3 =&gt; ( 4 * 3 - 1 ) = 11-й элемент</li>
+                        <li>n = 4 =&gt; ( 4 * 4 - 1 ) = 15-й элемент</li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+
+              </details>
+
+              <details class="show-piece not">
+                <summary><code>not</code></summary>
+                <pre>
+  <code>
+li:not(:first-child):not(:last-child) { Выберет все теги &lt;li&gt;, которые НЕ являются первыми и последними в их родителе }
+  
+:not(:not(...)) { двойной not не сработает}
+</code>
+</pre>
+
+                <p>Также в комбинации с :not не применяются:</p>
+                <ul>
+                  <li>объединение селекторов: например, li:not(.heart.jack) — некорректный селектор</li>
+                  <li>псевдоэлементы: li:not(::after) — неправильная запись</li>
+                  <li>селекторы-потомки, групповые селекторы или комбинации: например, нельзя писать li:not(a span) или
+                    li:not(a + span)</li>
+                </ul>
+              </details>
+
+              <details class="show-piece marker">
+                <summary><code>marker</code></summary>
+                <pre>
+  <code>
+delete: 
+
+summary::marker,
+summary::-webkit-details-marker {
+  display: none; 
+  content: "";
+}
+  </code>
+</pre>
+              </details>
+
+              <details class="show-piece hidden">
+                <summary><code>hidden</code></summary>
+                <a name="anchor-css-hidden"></a>
+                <p>Любому элементу можно добавить атрибут hidden и он пропадёт</p>
+
+                <p>В современных браузерах на этот атрибут повешен тот самый display: none, который вырубает элемент. Он
+                  бинарный как
+                  required или checked, так что его удобно выставлять через JavaScript. Только не забудьте добавить в
+                  стили [hidden] {
+                  display: none } для IE 10, Safari 5 и других старых браузеров.</p>
+                <p>У visibility: hidden есть другая приятная особенность: свойство наследуется, а значит ребёнок
+                  невидимого родителя может
+                  сменить видимость на visible. Такой трюк не пройдёт ни с display: none, ни с opacity: 0. С ним удобно
+                  делать всплывающие
+                  меню и подказки, прятать элементы из дизайна, но оставлять доступным их содержимое.</p>
+              </details>
+
+            </details>
+          </section>
+
+
+        </div> <!-- container -->
+      </section> <!-- css -->
+
+    </main>
+
+    @@include('html/footer.html', {})
+
+  </div> <!-- wrapper -->
+  <script src="js/app.min.js"></script>
+</body>
+
+</html>

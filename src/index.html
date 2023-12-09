@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+@@include('html/head.html', {
+"title": "Главная"
+})
+
+<body>
+  <div class="wrapper">
+
+    @@include('html/header.html', {})
+
+    <main class="page--main">
+
+      <siction class="index-html">
+        <div class="container">
+
+
+          
+
+
+          <section class="content-switcher-example">
+
+            <section class="checkout">
+
+              <ol class="tab-list list-reset">
+                <li class="tab-item">1</li>
+                <li class="tab-item is-active">2</li>
+                <li class="tab-item">3</li>
+                <li class="tab-item">4</li>
+                <li class="tab-item">5</li>
+              </ol>
+
+              <ul class="content-list list-reset">
+                <li class="content-item">Content-1</li>
+                <li class="content-item is-active">Content-2</li>
+                <li class="content-item">Content-3</li>
+                <li class="content-item">Content-4</li>
+                <li class="content-item">Content-5</li>
+              </ul>
+
+            </section>
+            
+              <textarea name="js" cols="80" rows="12">
+const tabItems = Array.from(document.querySelectorAll('.tab-item'));
+const contentItems = Array.from(document.querySelectorAll('.content-item'));
+//  Array.from что бы работал .find
+
+const clearActiveClass = (element, className = 'is-active') => {
+  element.find(item => item.classList.remove(`${className}`))
+}
+const setActiveClass = (element, index, className = 'is-active') => {
+  element[index].classList.add(`${className}`)
+}
+
+const checkoutTabs = (item, index) => {
+  item.addEventListener('click', () => {
+
+    if (item.classList.contains('is-active')) return
+
+    clearActiveClass(tabItems)
+    clearActiveClass(contentItems)
+
+    setActiveClass(tabItems, index)
+    setActiveClass(contentItems, index)
+
+  })
+}
+
+tabItems.forEach(checkoutTabs);
+            </textarea>
+
+          </section>
+
+          <article>
+
+            <ul>
+              <li>
+                <a href="css.html#anchor-css-hidden">
+                  Любому элементу можно добавить атрибут hidden и он пропадёт
+                </a>
+              </li>
+              <li>
+                <a href="js.html#delegate-event--menu">Меню на делегировании событий</a>
+              </li>
+              <li>
+                атрибут title="подсказка при hover"
+              </li>
+            </ul>
+
+
+          </article>
+
+          <section class="featured-articles">
+
+            <h2>Featured Articles</h2>
+
+            <ul class="main-menu list-reset">
+
+              <li class="main-menu__item">
+                <a href="flex.html">
+                  <h3>flex</h3>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                </a>
+              </li>
+              <li class="main-menu__item">
+                <a href="grid.html">
+                  <h3>grid</h3>
+                </a>
+              </li>
+              <li class="main-menu__item">
+                <a href="float.html">
+                  <h3>float</h3>
+                </a>
+              </li>
+              <li class="main-menu__item">
+                <a href="semantics.html">
+                  <h3>Семантика</h3>
+                </a>
+              </li>
+              <li class="main-menu__item">
+                <a href="swiper.html">
+                  <h3>swiper</h3>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                </a>
+              </li>
+              <li class="main-menu__item">
+                <a href="fslightbox.html">
+                  <h3>fslightbox</h3>
+                </a>
+              </li>
+              <li class="main-menu__item">
+                <a href="mathematics.html">
+                  <h3>mathematics</h3>
+                </a>
+              </li>
+              <li class="main-menu__item">
+                <a href="examples.html">
+                  <h3>examples</h3>
+                </a>
+              </li>
+
+            </ul>
+
+          </section>
+
+
+          <pre>
+              <code>
+   выделение текста при нажатии
+
+form {
+  user-select: none;
+}
+              </code>
+            </pre>
+
+
+          <div class="performance">
+            <p>Свойство column-width задаёт минимальную желаемую ширину колонки. Если свойство column-count ещё не было
+              задано, браузер
+              автоматически поделит текст на такое количество колонок, чтобы они уместились во всю доступную ширину.
+            </p>
+          </div>
+
+          <div class="performance">
+            <pre>
+  <code>
+примере нажатие на идентификатор приведет к прокрутке на 60 пикселей выше идентификатора.
+
+function scrollToId() {
+	const navHeight = 60;
+	window.scrollTo(0, window.pageYOffset - navHeight);
+}
+
+window.addEventListener('hashchange', scrollToId);
+  </code>
+</pre>
+          </div>
+
+          <div class="performance">
+            <p>false: пустая строка, 0, -0, null, undefined, NaN, false</p>
+          </div>
+
+          <div class="performance">
+            <p>Вы можете сначала добавить новый элемент на страницу, а потом уже менять ему текстовое содержимое и
+              класс, но тогда
+              браузеру придётся несколько раз перерисовывать страницу. Это неэффективно. Лучше добавлять на страницу
+              уже полностью
+              сформированный элемент.</p>
+          </div>
+
+          <div class="performance count">
+            <h3>css счетчик</h3>
+            <img src="img/count.jpg" alt="">
+          </div>
+
+          <div class="cover-for-video-youtube">
+            <h2>обложки к видео youtube</h2>
+            <p>ютуб хранит обложки к видео по адресу:</p>
+            <pre>
+  <code>
+i.ytimg.com/vi/ id видео/ разрешение обложки
+i.ytimg.com/vi_webp/ id видео/ разрешение обложки.webp
+
+https://i.ytimg.com/vi/ZwtLqMiQwcA/maxresdefault.jpg
+https://i.ytimg.com/vi_webp/ZwtLqMiQwcA/maxresdefault.webp
+
+качество миниатюры(обложки видео):
+
+maxresdefault.jpg - максимальное
+hqdefault.jpg - высокое
+mqdefault.jpg - среднее
+sddefault.jpg - стандартное
+  </code>
+</pre>
+
+          </div>
+
+          <div class="performance">
+            <h3>.active</h3>
+            <p>можно не писать отдельный сласс .active и присваивать ему какие то отдельные значения для одного
+              элемента
+            </p>
+            <p>нужно сласс .active делать для каждого элемента объеденив комбинатором класса(писать слитно при
+              присвоении значений в css)</p>
+            <pre>
+  <code>
+      &lt;div class="class-1111 active"&gt;
+      &lt;h1 class="class-2222 active"&gt;
+
+.class-1111.active {
+  background-position: -75px 0;
+} 
+
+.class-2222.active {
+  color: lightblue;
+}
+  </code>
+</pre>
+          </div>
+
+          <div class="preformance">
+            <p>initial - Устанавливает все свойства в начальные значения.</p>
+            <p>inherit - Устанавливает все свойства в их унаследованные значения.</p>
+            <p>unset - Изменяет все значения на соответствующее значение по умолчанию, которое является либо inherit
+              или
+              initial.</p>
+            <p>revert - Результирующие значения зависят от источника таблицы стилей, где находится это свойство.</p>
+            <p>revert-layer - Результирующие значения будут соответствовать предыдущему каскадному слою или
+              следующему
+              соответствующему правилу.</p>
+          </div>
+
+          <div class="performance class">
+            <h3>class="..."</h3>
+            <p>Класс должен отражать назначение элемента. Плохими считаются классы, которые описывают внешний вид.
+              Исключение делается для дивов-обёрток, которые нужны исключительно для оформления.<a
+                href="https://github.com/yoksel/common-words" target="_blank" rel="noopener noreferrer"> Шпоргалга
+                классов html</a></p>
+          </div>
+
+          <div class="performance button">
+            <p>У тега &lt;button&gt; обязательно нужно явно прописывать атрибут type. По умолчанию его значение —
+              submit, а зачастую нужен
+              тип button. Особенно важно это для кнопок, которые находятся вне форм и нужны для JavaScript.</p>
+          </div>
+
+          <div class="performance logo">
+            <p>Логотип — это ссылка на главную страницу сайта. Но как лучше поступить с разметкой логотипа на самой
+              главной странице?
+              Ведь это не очень хорошо, когда страница ссылается сама на себя. В случае главной страницы логотип всё
+              равно можно
+              оставить в теге &lt;a&gt;, но без атрибута href. Такой приём облегчает стилизацию.</p>
+          </div>
+
+          <div class="performance">
+            <h3>интерактивная карта</h3>
+            <p>Под интерактивную карту принято добавлять изображение с картой, на случай если интерактивная карта не
+              загрузилась. Каким
+              же образом её добавлять? Карта несёт информацию об адресе. В блоке «Контакты» только по карте можно
+              понять
+              адрес компании, ведь в тексте адрес не продублирован, а значит
+              если изображение потеряется, пользователь потеряет информацию о местонахождении компании. Таким
+              образом,
+              изображения
+              карт относятся к контентным изображениям.</p>
+            <p>Реализация: &lt;img&gt; (атрибут alt должен описывать изображение, если на карте адрес — Карта офиса
+              по
+              адресу улица Строителей, 15)</p>
+          </div>
+
+          <div class="performance error">
+            <h2>Error</h2>
+            <p>Ошибки типа error — это критические ошибки и их нужно обязательно исправлять. Это несоответствие
+              формальному синтаксису
+              языка.</p>
+            <p>Ошибки типа warning — это предупреждения, рекомендации. Эти предупреждения менее строгие, исправлять
+              их
+              необязательно.
+              Но понимать, почему они возникают, всё же стоит.</p>
+            <p>Например, у тега
+              &lt;section&gt; есть рекомендации о том, что хорошо бы в каждом теге &lt;section&gt; иметь заголовок.
+              Если
+              валидатор видит этот тег и не видит в нём заголовка, он покажет вам предупреждение. Необходимо ли это
+              править? Не
+              всегда. Error — обязательный к исправлению, warning — обязательный к размышлению.
+            </p>
+          </div>
+
+          <div class="performance text-decoration">
+            <p><span>text-decoration</span> - text-decoration-line, text-decoration-style, text-decoration-color;</p>
+          </div>
+
+          <div class="performance animation">
+            <p><span>animation:</span> name, duration, timing-function, delay, iteration-count, direction, fill-mode,
+              play-state.</p>
+          </div>
+
+
+
+        </div>
+      </siction>
+
+    </main>
+
+    @@include('html/footer.html', {})
+
+  </div>
+  <script src="js/app.min.js"></script>
+</body>
+
+</html>

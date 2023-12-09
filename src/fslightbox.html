@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+@@include('html/head.html', {
+"title": "fslightbox"
+})
+
+<body>
+  @@include('html/header.html', {})
+
+  <main class="page--main">
+
+    <section class="fslightbox">
+      <div class="container">
+
+        <hgroup>
+          <h1>fslightbox</h1>
+          <h3>Галлерея фотографий и видео</h3>
+        </hgroup>
+
+
+        <ul>
+          <li>
+            <a href="https://fslightbox.com/" target="_blank" rel="noopener noreferrer">fslightbox.com/</a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=QajyOqPeZw8" target="_blank" rel="noopener noreferrer">youtube</a>
+          </li>
+        </ul>
+        <pre>
+  <code>
+&lt;div&gt;
+
+  &lt;a data-fslightbox href="1.png"&gt;  ставим один href у якоря и img
+    &lt;img src="1.png" alt=""&gt;
+  &lt;/a&gt;
+
+  &lt;a data-fslightbox href="2.png"&gt;
+    &lt;img src="2.png" alt=""&gt;
+  &lt;/a&gt;
+
+  &lt;a data-fslightbox href="3.png"&gt;
+    &lt;img src="3.png" alt=""&gt;
+  &lt;/a&gt;
+
+  &lt;a data-fslightbox href="4.png"&gt;
+    &lt;img src="4.png" alt=""&gt;
+  &lt;/a&gt;
+ 
+  &lt;a data-fslightbox href="111.MOV"&gt;           
+    &lt;video src="111.MOV"&gt;&lt;/video&gt;         работает вместе с видео
+  &lt;/a&gt;
+
+  &lt;a data-fslightbox href="222.MOV"&gt;
+    &lt;video src="222.MOV"&gt;&lt;/video&gt;
+  &lt;/a&gt;
+
+&lt;/div&gt;
+  </code>
+</pre>
+
+      </div>
+    </section>
+
+  </main>
+
+  @@include('html/footer.html', {})
+  <!-- <script src="js/main.js"></script> -->
+</body>
+
+</html>

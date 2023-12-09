@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+@@include('html/head.html', {
+"title": "javaScript"
+})
+
+<body>
+  <div class="wrapper">
+
+    @@include('html/header.html', {})
+
+    <main class="page--main">
+
+      <section class="js">
+        <div class="container">
+
+          <h1>Javascript</h1>
+
+          <section class="js__checks">
+            <h2 class="title">Проверки</h2>
+
+            <details class="show-piece typeof">
+              <summary>typeof -- узнать тип примитивного значения</summary>
+              <pre>
+  <code>
+ console.log(typeof 21); // =&gt; number
+ console.log(typeof '21'); // =&gt; string
+ console.log(typeof false); // =&gt; boolean
+ console.log(typeof {}); // =&gt; object
+ console.log(typeof undefined); // =&gt; undefined
+ console.log(typeof null); // =&gt; object (признанный баг, который
+         не исправляют ради обратной совместимости)
+  </code>
+</pre>
+            </details>
+
+            <details class="show-piece isNaN">
+              <summary>isNaN -- является ли значение выражения числом</summary>
+              <pre>
+  <code>
+isNaN(123) // false (число)
+  
+isNaN("50 рублей") // (не число) 
+  </code>
+</pre>
+              <p>Иногда можно получить такую ошибку JavaScript — NaN — когда значение не является числом (а ожидается
+                число):</p>
+              <pre>
+  <code>
+  let a=8;
+  let b="pi";
+  let S=a*b; // S=NaN
+  </code>
+</pre>
+              <p>В качестве значения переменной может быть undefined — не определено. Такое случается, когда переменная
+                создана, но значение ей не присвоено:</p>
+              <pre>
+  <code>
+   let b;
+   document.write(b); // b=undefined 
+  </code>
+</pre>
+            </details>
+
+
+            <details class="show-piece">
+              <summary>четное или нечетное</summary>
+              <pre>
+  <code>
+const isEven = x =&gt; {
+  
+  if (x % 2 === 0) {  // If the remainder after dividing by two is 0, return true
+    return true;
+  }
+  return false; // If the number is odd, return false
+}
+
+isEven(12);  //true
+  </code>
+</pre>
+            </details>
+
+          </section>
+
+          <section class="js__transformation">
+            <h2 class="title">Преобразования</h2>
+
+            <pre>
+    <code>
+let a = parseInt(prompt("Возраст?", '18'));
+let b = Number(prompt("Вesult")); 
+
+x = +x // к числу
+x = x + '' // к строке
+x = !!x // к булеву типу
+
+x = Number(x) 
+x = String(x)
+x = Boolean(x)
+    </code>
+</pre>
+
+            <details class="show-piece join">
+              <summary>join - массив в строку</summary>
+              <pre>
+  <code>
+let arr = [1, 2, "str", false];
+
+arr.join(" "); // "1 2 str false" (string)
+  </code>
+</pre>
+            </details>
+
+            <details class="show-piece split">
+              <summary>split - строка в массив</summary>
+              <pre>
+  <code>
+let arrTwo = str.split("/"); // ["1", "2", "str", "false"] (array)
+  </code>
+</pre>
+            </details>
+
+            <details class="show-piece toString">
+              <summary>toString - объект в строку</summary>
+              <pre>
+    <code>
+obj.toString 
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece keys-values">
+              <summary>keys / values - объект в массив</summary>
+              <p>В стандартном конструкторе Object имеются методы keys и values с помощью которых можно
+                трансформировать
+                объект в массив ключей и значений</p>
+              <pre>
+  <code>
+const car = {
+  brand: 'Ford',
+  color: 'blue'
+}
+
+const keys = Object.keys(car); // ['brand', 'color'] 
+const values = Object.values(car); // ['Ford', 'blue'] 
+
+  </code>
+</pre>
+            </details>
+
+            <details class="show-piece nodelist-array">
+              <summary>NodeList - в массив </summary>
+              <pre>
+  <code>
+const nodeList = document.querySelectorAll('div');
+const result = [];
+
+for (const node of nodeList) {
+  result.push(node);
+}
+  </code>
+</pre>
+              <p>Также у NodeList есть метод forEach</p>
+              <pre>
+  <code>
+const nodeList = document.querySelectorAll('div');
+const result = [];
+
+nodeList.forEach((node) =&gt; {
+  result.push(node);
+});
+  </code>
+</pre>
+              <p>Array.from();</p>
+              <pre>
+  <code>
+const nodeList = document.querySelectorAll('div');
+const result = Array.from(nodeList);
+  </code>
+</pre>
+              <p>spread</p>
+              <pre>
+  <code>
+const divList = document.querySelectorAll('div');
+const arr = [...divList];
+  </code>
+</pre>
+            </details>
+
+            <details class="show-piece parseInt">
+              <summary>parseInt - строку в целое число</summary>
+              <p>преобразует указанную строку в целое число. Если есть второй параметр — система счисления —
+                преобразование происходит по указанному основанию системы счисления (8, 10 или 16):</p>
+              <pre>
+    <code>
+parseInt("435") // 435
+parseInt("3.14") // 3
+parseInt("-7.875") // -7
+parseInt("Вася") // NaN
+parseInt("15" ,8) // 13
+
+parseInt - отсекает дробную часть числа.
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece parseFloat">
+              <summary>parseFloat - строку в дробное число</summary>
+              <p>преобразует указанную строку в число с плавающей точкой (десятичной):</p>
+              <pre>
+    <code>
+parseFloat ("435") // 435
+parseFloat("3.14") // 3.14
+parseFloat("-7.875") // -7.875
+parseFloat ("Вася") // NaN
+parseFloat ("17.5") // 17.5
+    </code>
+</pre>
+            </details>
+
+          </section>
+
+          <section class="js__getElement">
+            <h2 class="title">Получение элементов</h2>
+
+            <p>Почти все методы возвращают коллекции элементов схожих с массивом но это объекты классов: Array,
+              NodeList,
+              HTMLCollection и т.д…</p>
+
+            <details class="show-piece element">
+              <summary>element</summary>
+              <pre>
+    <code>
+let e = document.querySelector('#nav').querySelector('ul.menu__list &gt; li[name="li"] + li');
+console.log(e); // element
+
+let eId = document.getElementById('menu__item-3');
+console.log(eId); // element
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece nodeList">
+              <summary>NodeList - статическая коллекция элементов</summary>
+              <pre>
+    <code>
+let eAll = document.querySelectorAll('li');
+console.log(eAll); // NodeList
+console.log(eAll[0]); // element
+
+let eName = document.getElementsByName('li'); //динамическая коллекция
+console.log(eName); // NodeList
+console.log(eName[1]);// element
+
+let e = list.childNodes; //динамическая коллекция
+хранит в себе псевдомассив дочерних узлов
+элемента (теги, комментарии и текстовые узлы).
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece htmlCollection">
+              <summary>HTMLCollection - динамическая коллекция элементов</summary>
+              <pre>
+    <code>
+let eTag = document.getElementsByTagName('li');
+console.log(eTag); // HTMLCollection
+console.log(eTag[2]); // element
+
+let eClass = document.getElementsByClassName('menu__item');
+console.log(eClass); // HTMLCollection
+console.log(eClass[3]); // element
+    </code>
+</pre>
+            </details>
+
+          </section>
+
+          <section class="js__transformation-document">
+
+            <h2 style="text-align: center;">Изменение документа</h2>
+
+
+
+
+            <details class="show-piece createElement">
+              <summary><code>textContent / innerHTML</code> - получить / добавить просто текст</summary>
+              <p><span class="red">Отличие обоих методов от <code>createTextNode</code> в том что эти методы меняют
+                  текст в уже
+                  существующем элементе в то время как <code>createTextNode</code> создает новый текстовый узел</span>
+              </p>
+
+              <p><code>textContent - </code> просто текст из элемента (более предпочтительней потому
+                что
+                не нужно парсить html)</p>
+              <p><code>innerHTML - </code> контент вместе с тегами</p>
+
+              <pre>
+    <code>
+element.textContent = 'Дальше будет &lt;b&gt;интереснее!&lt;/b&gt;';  // Дальше будет &lt;b&gt;интереснее!&lt;/b&gt;
+element.innerHTML = 'Дальше будет &lt;b&gt;интереснее!&lt;/b&gt;';    // Дальше будет <b>интереснее!</b>
+    </code>
+</pre>
+            </details>
+
+
+
+            <details class="show-piece createElement">
+              <summary>Создание узлов - <code>createElement / createTextNode / cloneNode</code></summary>
+              <ul>
+                <li><code>document.createElement('tag')</code></li>
+                <li><code>document.createTextNode('value') - схож с textContent</code></li>
+                <li><code>elem.cloneNode(deep / true / false)</code></li>
+              </ul>
+
+              <h4>Клонирование узла</h4>
+              <p><code>elem.cloneNode(true/false)</code></p>
+
+              <ul>
+                <li><code>deep - </code>true</li>
+                <li><code>true - </code>со всеми атрибутами и дочерними элементами</li>
+                <li><code>false - </code>без дочерних элементов.</li>
+              </ul>
+
+              <pre>
+    <code>
+&lt;div class="alert" id="div"&gt;
+  &lt;strong&gt;Всем привет!&lt;/strong&gt; Вы прочитали важное сообщение.
+&lt;/div&gt;
+
+let div2 = div.cloneNode(true); // клонировать сообщение
+div2.querySelector('strong').innerHTML = 'Всем пока!'; // изменить клонированный элемент
+
+div.after(div2); // показать клонированный элемент после существующего div
+    </code>
+</pre>
+
+            </details>
+
+
+            <details class="show-piece">
+
+              <summary>Вставка и удаление элементов -
+                <code>append / prepend / before / after / replaceWith / remove</code>
+              </summary>
+
+              <p>Методы node могут вставлять несколько узлов и текстовых фрагментов за один вызов.</p>
+
+              <ul>
+                <li><code>node.append(...nodes or strings) – вставляет в node в конец</code></li>
+                <li><code>node.prepend(...nodes or strings) – вставляет в node в начало</code></li>
+                <li><code>node.before(...nodes or strings) – вставляет прямо перед node</code></li>
+                <li><code>node.after(...nodes or strings) – вставляет сразу после node</code></li>
+                <li><code>node.replaceWith(...nodes or strings) – заменяет node</code></li>
+                <li><code>node.remove() – удаляет node</code></li>
+              </ul>
+
+              <pre>
+    <code>
+    <span class="red">before</span>
+&lt;ol id="ol"&gt;
+    <span class="red">prepend</span>
+  &lt;li&gt;0&lt;/li&gt;
+  &lt;li&gt;1&lt;/li&gt;
+  &lt;li&gt;2&lt;/li&gt;
+    <span class="red">append</span>
+&lt;/ol&gt;
+    <span class="red">after</span>
+    </code>
+</pre>
+            </details>
+
+
+            <details class="show-piece">
+              <summary>Устаревшие методы - <code>appendChild / insertBefore / removeChild / replaceChild</code>
+              </summary>
+              <p>Все эти методы возвращают node</p>
+              <ul>
+                <li><code>parent.appendChild(node)</code></li>
+                <li><code>parent.insertBefore(node, nextSibling)</code></li>
+                <li><code>parent.removeChild(node)</code></li>
+                <li><code>parent.replaceChild(newElem, node)</code></li>
+              </ul>
+            </details>
+
+
+            <details class="show-piece insertAdjacent">
+              <summary>Вставить фрагмент HTML - <code>insertAdjacent...</code></summary>
+              <pre>
+    <code>
+elem.insertAdjacentHTML('where', html) // вставляет html (вставит теги с содержимым)
+elem.insertAdjacentText('where', text) // строка text вставляется «как текст», вместо HTML
+elem.insertAdjacentElement('where', elem) // вставляет элемент elem
+    </code>
+</pre>
+              <p>вставляет в зависимости от where:</p>
+              <ul>
+                <li><code>beforebegin - </code>вставляет html прямо перед elem</li>
+                <li><code>afterbegin - </code>вставляет html в elem в начало</li>
+                <li><code>beforeend - </code>вставляет html в elem в конец</li>
+                <li><code>afterend - </code>вставляет html сразу после elem</li>
+              </ul>
+
+              <p>используют только insertAdjacentHTML, потому что для элементов и текста есть методы
+                append/prepend/before/after – их быстрее написать, и они могут вставлять как узлы, так и текст.</p>
+              <pre>
+  <code>
+let parent = document.querySelector(".styleAndClass");
+
+let details = document.createElement('details'); // создаем элемент
+
+details.className = "show-piece"; // добавим класс для стилей
+
+parent.append(details); // добавляем элемент на страницу
+
+//фаршируем внутри наш элемент
+details.insertAdjacentHTML('afterbegin', `
+&lt;summary&gt;&lt;code&gt;заголовок&lt;/code&gt;&lt;/summary&gt;
+&lt;p&gt;text&lt;/p&gt;
+&lt;pre&gt;
+    &lt;code&gt;
+код
+    &lt;/code&gt;
+  &lt;/pre&gt;
+&lt;p&gt;text&lt;/p&gt;
+&lt;p&gt;text&lt;/p&gt;
+`);
+  </code>
+</pre>
+            </details>
+
+
+            <details class="show-piece DocumentFragment">
+              <summary>DocumentFragment</summary>
+              <p>Специальный DOM-узел, обёртка для передачи списков узлов</p>
+              <p>он используется в некоторых других областях, например, для элемента template</p>
+            </details>
+
+
+            <details class="show-piece">
+              <summary>document.write</summary>
+              <p>работает только до загрузки страницы.</p>
+              <p>после того, как страница загружена, он уже непригоден к использованию</p>
+            </details>
+
+
+          </section>
+
+
+          <section class="styleAndClass">
+            <h2 style="text-align: center;">Стили и классы</h2>
+
+            <p>Классы – всегда предпочтительный вариант по сравнению со style. Мы должны манипулировать свойством style
+              только в том случае, если классы «не могут справиться»</p>
+
+            <pre>
+    <code>
+let top = /* сложные расчёты */;
+let left = /* сложные расчёты */;
+
+elem.style.left = left; // например, '123px', значение вычисляется во время работы скрипта
+elem.style.top = top; // например, '456px'
+    </code>
+</pre>
+
+
+            <details class="show-piece cssText">
+              <summary><code>cssText</code> - полная перезапись стилей</summary>
+
+              <p>оно может как добавить стили к существующим, так и полностью перезаписать их на новые</p>
+
+              <pre>
+    <code>
+let top = /* сложные расчёты */;
+let left = /* сложные расчёты */;
+
+elem.style.cssText = `
+  top: ${top};
+  left: ${left};
+`;
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece className">
+              <summary>className</summary>
+              <p>Если мы присваиваем что-то elem.className, то это заменяет всю строку с классами</p>
+              <pre>
+    <code>
+&lt;body class="main page"&gt;
+
+  &lt;script&gt;
+    alert(document.body.className); // main page
+  &lt;/script&gt;
+&lt;/body&gt;
+    </code>
+</pre>
+
+              <p>Если мы присваиваем что-то elem.className, то это заменяет всю строку с классами.</p>
+            </details>
+
+            <details class="show-piece classList">
+              <summary><code>classList - add / remove / toggle / contains</code></summary>
+              <ul>
+                <li><code>elem.classList.add/remove("class без точки")</code> – добавить/удалить класс</li>
+                <li><code>elem.classList.toggle("class без точки")</code> – добавить класс, если его нет, иначе
+                  удалить</li>
+                <li><code>elem.classList.contains("class без точки")</code> – проверка наличия класса, возвращает
+                  true/false</li>
+              </ul>
+
+
+              <pre>
+    <code>
+classList перебираемый, поэтому можно перебрать все классы:
+
+&lt;body class="main page"&gt;
+
+    for (let name of document.body.classList) {
+      alert(name); // main, затем page
+    }
+&lt;/body&gt;
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece style">
+              <summary>style</summary>
+              <pre>
+    <code>
+button.style.MozBorderRadius = '5px';
+button.style.WebkitBorderRadius = '5px';
+
+document.body.style.backgroundColor = prompt('background color?', 'green');
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece">
+              <summary>Сброс стилей</summary>
+              <pre>
+    <code>
+document.body.style.display = "none"; // скрыть
+
+setTimeout(() =&lt; document.body.style.display = "", 1000); // возврат к нормальному состоянию
+    </code>
+</pre>
+            </details>
+
+            <details class="show-piece">
+              <summary>Получить стили</summary>
+              <p><code>getComputedStyle(element, [pseudo])</code></p>
+
+
+              <ul>
+                <li><code>element - </code>Элемент, значения для которого нужно получить</li>
+                <li><code>pseudo - </code>Указывается, если нужен стиль псевдоэлемента, например ::before. Пустая строка
+                  или отсутствие аргумента означают сам элемент.</li>
+              </ul>
+
+              <p>getComputedStyle требует полное свойство!
+                Для правильного получения значения нужно указать точное свойство. Например: paddingLeft, marginTop,
+                borderTopWidth. При обращении к сокращённому: padding, margin, border – правильный результат не
+                гарантируется.</p>
+            </details>
+
+          </section>
+
+          <section class="js__cycles">
+            <h2 class="title">циклы</h2>
+
+            <details class="show-piece for">
+              <summary>for</summary>
+              <p>пройти n раз свойства или значения</p>
+              <p>i внутри for не индекс, это просто счетчик который совпадает с индексами на каждой итерации начиная с
+                <code>let i = 0;</code>
+              </p>
+              <pre>
+ <code>
+for (let i = 0; i &lt; arr.length; i++) {
+  console.log(i); //ключи
+  console.log(arr[i]); //значения
+}
+ </code>
+</pre>
+            </details>
+
+            <details class="show-piece for-in">
+              <summary>for-in</summary>
+              <p>перебор всех свойств или значений // только obj</p>
+              <pre>
+ <code>
+ for (let key in obj) {
+  console.log(key); //свойства
+  console.log(obj[key]); //значения
+ }
+ </code>
+</pre>
+            </details>
+
+            <details class="show-piece for-of">
+              <summary>for-of</summary>
+              <p>перебор всех значений // только значений</p>
+              <pre>
+ <code>
+ for (let i of arr) {
+  console.log(i) //значения
+ }
+    
+ for of работает сразу со значениями:
+    
+ iter - строка/массив/объект/и т.д.
+
+ let iter = [ 2, 4, 9, "9" ];
+
+ for (let i of iter) {
+  i += 1; ----- for of может изменять значения прям на ходу потому
+  console.log(i);           что работает сразу со значениями
+ }
+ // 3
+ // 5
+ // 10
+ // "91" —- string (произошел concat)
+ </code>
+</pre>
+            </details>
+
+          </section>
+
+          <section class="structures">
+            <h2 class="title">структуры</h2>
+
+
+            <details class="show-piece primitives">
+              <summary>примитивы</summary>
+              <p>Все кроме объекта являются примитивными.</p>
+              <p>Примитивы неизменны, строку можно только перезаписать полностью. JavaScript
+                неявно оборачивает примитив в объект его типа, так что на примитивах возможно использовать свойства и
+                методы этих объектов.</p>
+              <p>Number, BigInt, String, Boolean, null, undefined, Symbol, Object.</p>
+            </details>
+
+            <details class="show-piece string">
+              <summary>string</summary>
+              <p>Объект класса String</p>
+              <p>cтрока - примитив, приметив неизменяем(только заменяем).</p>
+              <pre>
+    <code>
+let str = "Строковой литерал"; //string
+let str = new String("Объект класса String"); //object
+ 
+ 
+let str = "How are you?"; //string
+ 
+   "H  o  w     a  r  e     y  o  u  ?";
+    0  1  2  3  4  5  6  7  8  9  10 11
+пробел тоже символ по этому у него есть индекс.
+    </code>
+</pre>
+              <p>доступ к символам:</p>
+              <pre>
+    <code>
+let str = "JavaScript";
+
+str[0] // J str[index] -- es5
+str.charAt(0) // J
+str.at(0) // J -- Array.prototype.at
+
+console.log(str[str.length - 1]); // t
+console.log(str.at(-1)); // t
+    </code>
+</pre>
+              <p>charAt() или []</p>
+              <pre>
+    <code>
+если на месте искомой позиции символа нет:
+  - charAt() вернет пустую строку ''
+  - [] – вернет undefined.
+    </code>
+</pre>
+
+              <div class="block">
+                <h2>перебор строки</h2>
+                <pre>
+    <code>
+let str = "Hello";
+
+for(let i of str) {
+    console.log(i);
+}
+  //
+    H
+    e
+    l
+    l
+    o
+     //
+    </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h2>Методы String</h2>
+
+                <ul class="list-reset">
+                  <li>at() -- возвращает символ</li>
+                  <li>charAt() and slice() возвращает строковые значения на основе индексов</li>
+                  <li>indexOf() and lastIndexOf() вернут индексы на основе значений</li>
+
+
+                  <li>charCodeAt() -- возвращает числовое значение Юникода для символа по индексу</li>
+                  <li>codePointAt() -- возвращает неотрицательное целое число, являющееся закодированным в UTF-16
+                    значением кодовой точки</li>
+
+                  <li>concat() -- объединяет</li>
+
+                  <li>startsWith() -- начинается ли строка с символов указанных в скобках</li>
+                  <li>endsWith() -- заканчивается ли строка символами указанными в скобках</li>
+
+                  <li>includes() -- проверяет, содержит ли строка заданную подстроку</li>
+                  <li>indexOf() -- возвращает индекс первого вхождения</li>
+                  <li>lastIndexOf() -- возвращает индекс последнего вхождения</li>
+                  <li>match()-- возвращает совпадения с регулярным выражением</li>
+
+                  <li>padStart() -- дополняет текущую строку с начала</li>
+                  <li>padEnd() -- дополняет текущую строку с конца</li>
+
+                  <li>repeat() -- конструирует и возвращает новую строку</li>
+
+                  <li>replace() -- замена части</li>
+
+
+                  <li>search() -- возвращает индекс первого сопоставления с регулярным выражением внутри строки.</li>
+
+                  <li>split() -- разбивает объект String на массив строк</li>
+
+                  <li>toLocaleLowerCase() / toLocaleUpperCase() / toLowerCase() / toUpperCase()</li>
+                  <li>valueOf() возвращает примитивное значение объекта String.</li>
+
+                  <li>toString() возвращает строку, представляющую объект и делает тоже самое, что и метод
+                    String.prototype.valueOf().</li>
+
+                  <li>trim() удаляет пробельные символы с начала и конца строки</li>
+
+                </ul>
+
+                <details class="show-piece charAt">
+                  <summary>charAt -- возврата символа</summary>
+                  <p>метод для возврата символа, используя индекс в качестве параметра</p>
+                  <pre>
+ <code>
+"How are you?".charAt(5); //r
+ </code>
+</pre>
+                </details>
+
+                <details class="show-piece indexOf">
+                  <summary>indexOf -- поиск подстроки</summary>
+                  <p>ищет подстроку substr в строке str, начиная с позиции pos, и возвращает позицию совпадения, либо -1
+                    при отсутствии совпадений.</p>
+                  <p>чувствителен к регистру</p>
+                  <p>вернет порядковый номер первого символа в экземпляре.</p>
+                  <pre>
+ <code>
+let str = 'Widget with id';
+ 
+alert( str.indexOf('Widget') ); // 0, потому что подстрока 'Widget' найдена в начале
+alert( str.indexOf('widget') ); // -1, совпадений нет, поиск чувствителен к регистру
+ 
+alert( str.indexOf("id") ); // 1, подстрока "id" найдена на позиции 1 (..idget with id)
+это если не указать второй параметр, если указать индекс
+дальше позиции 2 то он найдет другое совпадение
+ 
+Необязательный второй аргумент позволяет начать поиск с
+определённой позиции.
+str.indexOf("id", 2); // 12
+ </code>
+</pre>
+
+                  <p>Чтобы найти все вхождения подстроки, нужно запустить indexOf в цикле. Каждый раз, получив
+                    очередную
+                    позицию, начинаем
+                    новый поиск со следующей:</p>
+
+                  <pre>
+ <code>
+let str = 'Ослик Иа-Иа посмотрел на виадук';
+ 
+let target = 'Иа'; // цель поиска
+ 
+let pos = 0;
+while (true) {
+  let foundPos = str.indexOf(target, pos);
+  if (foundPos == -1) break;
+ 
+  alert( `Найдено тут: ${foundPos}` );
+  pos = foundPos + 1; // продолжаем со следующей позиции
+}
+ 
+Тот же алгоритм можно записать и короче:
+ 
+let str = "Ослик Иа-Иа посмотрел на виадук";
+let target = "Иа";
+ 
+let pos = -1;
+  while ((pos = str.indexOf(target, pos + 1)) != -1) {
+  alert( pos );
+}
+ </code>
+</pre>
+                </details>
+
+                <details class="show-piece includes">
+                  <summary>includes(substr, pos) -- возвращает boolean</summary>
+                  <p>возвращает true, если в строке str есть подстрока substr, либо false</p>
+                  <p>если нам необходимо проверить, есть ли совпадение, но позиция не нужна</p>
+                  <pre>
+<code>
+alert( "Widget with id".includes("Widget") ); // true
+alert( "Hello".includes("Bye") ); // false
+ 
+второй аргумент позволяет начать поиск с определённой позиции
+alert( "Midget".includes("id") ); // true
+alert( "Midget".includes("id", 3) ); // false, поиск начат с позиции 3
+</code>
+  </pre>
+                </details>
+
+              </div>
+
+              <div class="performance">
+                <h2>Получение подстроки</h2>
+                <p>В JavaScript есть 3 метода для получения подстроки: substring, substr и slice.</p>
+
+                <details class="show-piece slice">
+                  <summary>slice(start [, end]) -- возвращает часть строки</summary>
+                  <pre>
+<code>
+"How are you?".slice(8, 11); //you
+      
+            индексы символов:  0 1 2 3 4 5 6 7 8
+                              ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+            индексы slice:    0 1 2 3 4 5 6 7 8 9
+
+Если аргумент end отсутствует, slice возвращает символы до конца строки.
+</code>
+</pre>
+                </details>
+              </div>
+
+
+            </details>
+
+            <details class="show-piece function">
+              <summary>function</summary>
+              <p>объект класса Function</p>
+              <p>Функция – особого типа значение переменной</p>
+
+              <ul>
+                <li>функция возвращает только один результат своей работы</li>
+                <li>после <code>return</code> код не выполняется, происходит выход из функции</li>
+                <li>если в функции нет <code>return</code> то она вернет <code>indefined</code></li>
+              </ul>
+
+              <div class="performance">
+                <h3 class="performance__title">Function Declaration - объявление функции</h3>
+
+                <p>может быть вызвана раньше, чем она объявлена.</p>
+                <p>доступна везде внутри блока в котором находится, но не снаружи него</p>
+                <p>инструкция определяет переменную (имя функции) и назначает ей ссылку на функцию. Объявления функций
+                  не
+                  являются
+                  частью обычной
+                  последовательности выполнения программ. Они перемещаются в верхнюю часть своей области видимости.</p>
+                <pre>
+    <code>
+function sayHi() {
+  console.log("Привет");
+}
+sayHi(); //Привет
+    </code>
+</pre>
+
+              </div>
+
+              <div class="performance">
+                <h3>Function Expression - функциональное выражение</h3>
+                <p>создаётся, когда выполнение доходит до него.</p>
+                <pre>
+    <code>
+let sayHi = function() {
+   console.log("Привет");
+}
+sayHi(); //Привет
+    </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>стрелочные</h3>
+                <pre>
+  <code>
+(...args) =&gt; expression
+
+(...args) =&gt; { return } если использовать скобки то надо явно указать return
+
+return без следующего за ним выражения приводит к тому что функция возвращает undefined
+
+одна и та же функция:
+const square = (x) =&gt; {return x * x};
+const square = x =&gt; x * x;
+  </code>
+</pre>
+              </div>
+            </details>
+
+
+
+            <details class="show-piece constructor">
+              <summary>constructor</summary>
+
+              <pre>
+  <code>
+Свойство <span style="color: #cc4700;">constructor</span> ссылается на функцию-конструктор, которая была использована при создании объекта:
+            
+&lt;script&gt;
+            
+let x = new String();
+            
+if (x.constructor == String)
+  document.write("Это объект String");  
+else
+  document.write("Это не String");  
+                        
+        // выведет:  Это объект String
+            
+&lt;/script&gt;
+  </code>
+</pre>
+            </details>
+
+
+
+
+            <details class="show-piece htmlCollection">
+              <summary>HTMLCollection</summary>
+              <p>объект класса HTMLCollection</p>
+              <p>getElementsBy...</p>
+              <ul>
+                <li>Динамическая коллекция элементов</li>
+                <li>Не имеет привычных методов массива</li>
+                <li>Хранит только узлы HTML элементов(теги)</li>
+                <li>Обращение к элементам коллекции:
+                  <ul>
+                    <li>по индексу</li>
+                    <li>по имени методом namedItem</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <p>если возвращенная коллекция динамическая то перебирать ее нужно с конца (страница 274)</p>
+            </details>
+
+            <details class="show-piece nodeList">
+              <summary>NodeList</summary>
+              <p>объект класса NodeList</p>
+              <p>querySelectorAll / getElementsByName / childNodes</p>
+              <ul>
+                <li>статическая / динамическая коллекция элементов</li>
+                <li>не имеет привычных методов массива</li>
+                <li>хранит любые типы узлов(текстовые узлы и комментарии)</li>
+                <li>обращение к элементам коллекции только по индексу</li>
+              </ul>
+            </details>
+
+            <details class="show-piece array">
+              <summary>array</summary>
+              <h2>объект класса Array</h2>
+              <ul>
+                <li>списки пронумерованных значений</li>
+                <li>могут содержать данные любого типа</li>
+                <li>многие методы массива будут влиять на исходный массив, а не на его копию</li>
+              </ul>
+              <pre>
+  <code>
+const a = []
+const a = [1, 2, 3]
+const a = Array.of(1, 2, 3)
+const a = Array(6).fill(1) // 6 элементов c числом 1
+</code>
+</pre>
+              <h3>Доступ к элементам по индексам arr[index]</h3>
+              <pre>
+   <code>
+let arr = [10, "2", 3, false];
+let first = arr[0];
+let count = 1;
+
+arr[0] и arr.at(0) оба вернут первый элемент
+
+console.log(arr[3]); // false
+console.log(first); // 10
+console.log(arr[count]) // "2"
+  </code>
+</pre>
+
+              <p>При использовании точки слово, стоящее после нее, является точечным именем свойства.</p>
+              <p>При использовании квадратных скобок,для получении имени свойства
+                <i>Вычисляется</i> заключенное в скобки выражение.
+              </p>
+              <p>Если value.x извлекает из значения value свойство с именем x, то
+                value[x] пытается вычислить выражение x и применяет результат, преобразованный в строку, в качестве
+                имени
+                свойства</p>
+              <p>По этому если вы знаете что интересующее вас свойство называется color, то пишите сразу value.color
+              </p>
+              <h3>replacement</h3>
+              <pre>
+   <code>
+arr[0] = 4
+console.log(a) //[4, "2", 3, false];
+   </code>
+</pre>
+
+              <h3>add</h3>
+              <pre>
+  <code>
+a[5] = false;
+console.log(arr) //[ 4, "2", 3, false "", false ] // Разреженный массив
+  </code>
+</pre>
+
+              <h3>Обращение к несуществующему элементу вернет undefined</h3>
+              <pre>
+   <code>
+console.log(arr[7]); // undefined
+   </code>
+</pre>
+
+              <h2>меняем элементы массива местами</h2>
+              <pre>
+    <code>
+let a = [4, 1, 2, 3];
+let swap = a[0];
+
+a[1] = swap; // [1, 4, 2, 3]
+    </code>
+</pre>
+              <p>если сразу записать на первое место значение второго элемента, то мы потеряем значение первого.</p>
+
+
+              <div>
+                <p>matches() //проверка</p>
+                <p>closet() //возвращает</p>
+                <p>contains() //проверка</p>
+              </div>
+
+              <details class="show-piece array-clone">
+                <summary>Клонирование массива</summary>
+                <p>В js нет метода для клонирования массивов</p>
+                <p>Этот метод легко сэмулировать, помня, что concat и slice не меняют исходный массив. Достаточно
+                  вызвать
+                  метод
+                  concat без
+                  аргументов или метод slice с единственным аргументом равным 0.</p>
+                <pre>
+   <code>
+let a = [1,2,3];
+let b = a.concat();
+let c = a.slice(0);
+
+(a + ';' + b + ';' + c); // '1,2,3;1,2,3;1,2,3'
+
+([a == b, a == c, b == c]); // [ false,false,false ]
+   </code>
+</pre>
+                <p>Если в массиве лежат ссылки на объекты, в том числе ссылки на другие массивы, то в новосозданном
+                  массиве будут лежать
+                  ссылки на те же самые объекты. Поэтому если вы хотите клонировать многомерный массив, то
+                  придётся
+                  вручную создавать
+                  новый массив, после чего перебрать подмассивы исходного массива и клонировать их в новый.</p>
+                <pre>
+   <code>
+  Клонируется только массив верхнего уровня:
+let a = [
+[1,2,3],
+[4,5,6],
+[7,8,9]
+];
+
+let b = a.concat();
+
+a[0][1] // 2
+b[0][1] // 2
+
+b[0][1] = 15;
+a[0][1] // 15
+   </code>
+</pre>
+                <pre>
+   <code>
+  Клонируем вложенные массивы:
+
+let a = [
+[1,2,3],
+[4,5,6],
+[7,8,9]
+];
+
+let b = [ ];
+  a.forEach(function(subArry) {
+  b.push(subArray.concat());
+})
+
+a[0][1]; // 2
+b[0][1]; // 2
+
+b[0][1] = 15;
+a[0][1]; // 15
+   </code>
+</pre>
+
+
+              </details>
+
+              <div class="performance">
+
+                <h2>Методы массивов</h2>
+
+                <h2>replace</h2>
+                <p>из числа с запятыми 3,45,666 можем получить 345666 использовав <code>.replace(/,/g " ")</code></p>
+
+                <details class="show-piece reverse">
+                  <summary>Array.indexOf</summary>
+                  Array.indexOf — ищет только 1 символ
+                  String.indexOf — может искать строку больше 1 символа
+                </details>
+
+                <details class="show-piece reverse">
+                  <summary>reverse - разворачивает</summary>
+                  <p>изменяет исходный массив</p>
+
+                  <pre>
+  <code>
+let a = [ ];
+
+a[1] = 1;
+b[2] = 2;
+
+console.log(a + " : " + [0 in a, 1 in a, 2 in a]); // ,1,2, : false,true,true
+
+a.reverse();
+
+console.log(a + " : " + [0 in a, 1 in a, 2 in a]); // 2,1, : true,true,false
+  </code>
+</pre>
+                </details>
+
+                <details class="show-piece sort">
+                  <summary>sort - сортирует</summary>
+                  <p>изменяет исходный массив</p>
+                  <p>принимает единственным аргументом функцию, сравнивающую элементы массива. Если функция
+                    сравнения не
+                    задана, то элементы
+                    сортируются в лексикографическом порядке.</p>
+                  <pre>
+   <code>
+ var a = ['d', 'b', 'a', 'e', 'c'];
+ a.sort();
+ alert(a); // a,b,c,d,e
+   </code>
+</pre>
+                  <p>без переданной callback -функции, если сортировать числа, sort отсортирует их как строки,
+                    а не как
+                    числа.</p>
+                  <pre>
+   <code>
+ let a = [4, 2, 10, 5, 30];
+ a.sort(); // 10,2,30,4,5
+   </code>
+</pre>
+                  <p>для сортировки чисел необходимо передать методу sort функцию сравнения двух чисел (a - b)
+                    / (a + b)
+                  </p>
+                  <pre>
+   <code>
+ let arr = [ 3, 22, -10, 1, 7 ]
+
+ без callback - функции
+ arr.sort(); // [-10, 1, 22, 3, 7] - сортирует в лексикографическом порядке
+
+ с функцией сравнения
+ arr.sort((a-b) =&gt; a - b); // [-10, 1, 3, 7, 22] - сортирует по порядку
+   </code>
+</pre>
+                </details>
+
+                <details class="show-piece concat">
+                  <summary>concat</summary>
+                  <p>создаёт копию исходного массива, добавляя к нему переданные аргументы</p>
+                  <pre>
+   <code>
+ Array.prototype.toString = function() {
+   return '[' + this.join(,) + ']';
+ };
+
+
+ let a = [1,2,3];
+
+ a.concat(4,5,6); //[1,2,3,4,5,6]
+
+ a.concat([4,5],[6]); //[1,2,3,4,5,6]
+   </code>
+</pre>
+                  <p>Однако дальше одного уровня concat аргументы-массивы не разворачивает</p>
+                  <pre>
+   <code>
+ a.concat([4, [5], 6]); //[1,2,3,4,[5],6]
+   </code>
+</pre>
+                  <p>пропуски как из исходного массива, так и из массивов-аргументов, сохраняются</p>
+                  <pre>
+   <code>
+ let a = [1, , 3];
+
+ console.log(a.concat([4, , 6])); // [1, , 3, 4, , 6]
+   </code>
+</pre>
+                </details>
+
+                <details class="show-piece slice">
+                  <summary>slice - возвращает подмассив исходного массива</summary>
+                  <p>slice(begin[, end])</p>
+                  <p>возвращает подмассив исходного массива, начиная с индекса begin и заканчивая индексом end
+                    - 1.</p>
+                  <p>метод массива с помощью которого можно получить копию части или всего массива</p>
+                  <p>Чтобы легче запомнить такую странную нумерацию, лучше считать, что передаются индексы не
+                    элементов,
+                    а "межэлементного пространства".</p>
+                  <pre>
+   <code>
+ индексы элементов: 0 1 2 3 4 5 6 7 8
+                   ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+ индексы slice:    0 1 2 3 4 5 6 7 8 9
+   </code>
+</pre>
+                  <p>становится понятно, что ar.slice(0, 1) вернёт только нулевой элемент, а slice(5, 9) — с
+                    пятого по
+                    восьмой элементы.</p>
+                  <pre>
+   <code>
+let arr = [0, 1, 2, 3, 4, 5];
+
+arr.slice(0, 2); // 0,1
+arr.slice(4, 5); // 4
+   </code>
+</pre>
+                  <p>Если второй аргумент является отрицательным числом, то отсчёт второго индекса идёт с конца
+                    массива.
+                  </p>
+                  <pre>
+  <code>
+arr.slice(0, -2); // 0,1,2,3 
+  </code>
+</pre>
+                  <p>Если же второй аргумент не передан вообще, то возвращается копия массива от begin до
+                    конца.</p>
+                  <pre>
+   <code>
+arr.slice(3); // 3,4,5
+   </code>
+</pre>
+                </details>
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </details>
+
+            <details class="show-piece object">
+              <summary>object</summary>
+              <p>Объекты для хранения именованных коллекций</p>
+              <p>Объекты – это ссылочный тип, когда вы присваиваете объект переменной, вы присваиваете ей не сам этот
+                объект, а ссылку на него, которая указывает на то место в памяти компьютера, где он находится.</p>
+              <pre>
+<code>
+const person = {
+name: 'Игорь',      // свойство : значение
+  getFullName() {   // метод
+    return `${this.name}`
+  },
+}
+ </code>
+</pre>
+
+              <div class="performance">
+                <h3>свойства</h3>
+                <ul>
+                  <li>свойства это пары ключ: значение</li>
+                  <li>свойства объекта неявно имеют строковый тип</li>
+                  <li>свойства это характеристики объекта</li>
+                  <li>свойства подобны переменным, но в составе объекта</li>
+                </ul>
+                <h3>методы</h3>
+                <ul>
+                  <li>Методы – это поведение объекта, его функции</li>
+                  <li>Методы – это свойства, у которых значение является функцией</li>
+                </ul>
+              </div>
+
+              <div class="performance">
+                <h3>имена свойств в объекте не явно являются строками.</h3>
+                <p>Их можно не заключать в кавычки, это допустимо только если они составлены по правилам именования
+                  переменных
+                </p>
+                <pre>
+ <code>
+{
+  '': 1, // имя является пустой строкой
+  'author of post': 'Алексей', // имя состоит из нескольких слов
+}
+ </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>Обращение к свойствам</h3>
+                <pre>
+ <code>
+через точку:
+person.firstName;
+ 
+через квадратные скобки, ключ в этом случае нужно указывать в виде строки:
+person['name'];
+ 
+ 
+разница в том что через . мы не можем обратиться к нестандартному свойству, 
+например которое состоит из двух слов или имеет тип nember:
+ 
+person["new prop"] = "bateman";
+
+obj[3] 
+ </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>обращение к методам</h3>
+                <pre>
+  <code>
+const getName = person.getFullName();
+ 
+getName;
+person.getFullName();
+person['getFullName']();
+  </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>добавление свойств</h3>
+                <pre>
+  <code>
+person.age= 18;
+person["last name"] = "Рыбинский";
+person.children = [
+  {
+    name: 'Алиса',
+    age: 8
+  },
+  {
+    name: 'Виктор',
+    age: 14
+  }
+];
+  </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>изменим значения свойств</h3>
+                <pre>
+  <code>
+person.name= 'Иван';
+person["new prop"] = "money";
+  </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>Удаление свойств</h3>
+                <pre>
+  <code>
+delete person.age;
+  </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>Проверить наличия ключа</h3>
+                <pre>
+  <code>
+'name' in person // true
+'middleName' in person // false
+  </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>перебор объекта</h3>
+                <pre>
+  <code>
+Object.keys(car).forEach((key) =&gt; {
+  console.log(`${key}: ${car[key]}`);
+});
+  </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>Если нужно перебрать только значения, то так:</h3>
+                <pre>
+  <code>
+Object.values(car).forEach((value) =&gt; {
+  console.log(value);
+});
+  </code>
+</pre>
+              </div>
+
+              <div class="performance">
+                <h3>keys / values / entries</h3>
+<pre><code>
+const person = {
+  name: "Igor",
+  lastName: "Rybinsky",
+  age: 28,
+  city: "Bratsk"
+}
+
+Object.keys(obj);    // массив имен объекта
+Object.values(obj);  // массив значений объекта
+Object.entries(obj); // массив массивов [имя свойства, значение свойства]
+
+
+console.log(Object.keys(person));    // [ 'name', 'lastName', 'age', 'city' ]
+console.log(Object.values(person));  // [ 'Igor', 'Rybinsky', 28, 'Bratsk' ]
+console.log(Object.entries(person)); // [ ['name', 'Igor'], ['lastName', 'Rybinsky'], ['age', 28], ['city', 'Bratsk'] ]
+
+
+</code></pre>
+              </div>
+
+              
+
+              <div class="performance">
+                <h2>методы объектов</h2>
+                <p>delete key — удалит значение</p>
+                <p>key in obj — проверка наличия ключа</p>
+                <p>obj.keys — вернет массив ключей</p>
+                <p>obj.assign — копирует все свойства</p>
+              </div>
+
+              <div class="performance">
+                <details class="show-piece object-clone">
+                  <summary>Копирование объектов</summary>
+                  <p>Переменная, содержащая объект на самом деле содержит не сам объект, а только ссылку на него. При
+                    копировании объектов в отличие от значений примитивных типов происходит передача ссылки.</p>
+                  <pre>
+  <code>
+const student1 = { name: 'Carl' };
+const student2 = student1;
+
+Теперь student1 и student2 содержат ссылки, 
+указывающие на один и тот же объект.
+
+student2.name = 'Nelly';
+console.log(student1.name); // Nelly
+ </code>
+</pre>
+                  <p>А что если нам необходимо скопировать не саму ссылку, а создать новый объект с такими же
+                    свойствами?
+                  </p>
+                  <pre>
+ <code>
+const student3 = {};
+for (const key in student1) {
+  student3[key] = student1[key];
+}
+
+student3 содержит клон объекта student1
+student3.name = 'Thyra';
+в student1 значение name осталось прежним
+console.log(student1.name); // Nelly
+ </code>
+</pre>
+
+                  <h3>Другой способ скопировать свойства:</h3>
+                  <pre>
+ <code>
+const student4 = Object.assign({}, student1);
+ </code>
+</pre>
+
+                  <p>Object.assign() позволяет скопировать свойства из множества объектов.</p>
+                  <pre>
+ <code>
+const target = { a: 1 };
+const source1 = { b: 2 };
+const source2 = { c: 3 };
+Object.assign(target, source1, source2);
+console.log(target); // {a: 1, b: 2, c: 3}
+ </code>
+</pre>
+
+                  <h2>Сравнение объектов</h2>
+                  <pre>
+ <code>
+let objA = {};
+let objB = objA;
+let objC = {};
+
+console.log( objA === objB ); // true, т.к. переменные содержат одну и ту же ссылку
+console.log( objA === objC ); // false, т.к. переменные содержат разные ссылки (оба объекта пусты, но это разные объекты)
+ </code>
+</pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary>Вычисляемые свойства</summary>
+                  <p>В JavaScript имя свойства может быть вычисляемым. То есть для задания имени можно использовать
+                    выражение, результат вычисления которого и будет это имя. Указывать вычисляемое свойство необходимо
+                    в
+                    квадратных скобках [ ]:</p>
+                  <pre>
+  <code>
+const key = 'url';
+const app = {
+  name: 'Yandex',
+  [key]: 'https://yandex.ru/', // имя свойства будет взято из переменной key
+};
+console.log(app.url); // 'https://yandex.ru/'
+ </code>
+</pre>
+
+                  <h3>метод с более сложным выражением:</h3>
+                  <pre>
+  <code>
+const key = 'url';
+const app = {
+  name: 'Yandex',
+  [key]: 'https://yandex.ru/',
+  ['get' + key.toUpperCase()]() {
+    return this[key];
+  }
+};
+console.log(app.getURL()); // 'https://yandex.ru/'
+ </code>
+</pre>
+                </details>
+
+                <details class="show-piece object-properties">
+                  <summary>Свойства объектов и их конфигурация</summary>
+                  <a href="https://itchief.ru/javascript/objects" target="_blank" rel="noopener noreferrer">источник
+                    https://itchief.ru/javascript/objects</a>
+
+                  <p>До этого времени мы рассматривали свойства как пары «ключ: значение».</p>
+                  <p>Но свойство кроме значения (value) имеет специальные флаги:</p>
+                  <ul>
+                    <li>writable – доступно ли свойство для изменения;</li>
+                    <li>enumerable – доступно ли свойство для перебора в циклах;</li>
+                    <li>configurable – доступно ли свойство для настройки и удаления.</li>
+                  </ul>
+
+
+                </details>
+              </div>
+
+
+
+
+            </details>
+
+            <details class="show-piece map">
+              <summary>map</summary>
+            </details>
+
+            <details class="show-piece set">
+              <summary>set</summary>
+            </details>
+
+          </section>
+
+          <section class="js__logical-operators">
+            <details class="show-block logical-operators">
+              <summary><code>Логические операторы</code></summary>
+
+              <details class="show-piece">
+                <summary><code>?</code> -- если условие истинно, возвращается значение1, в противном случае –
+                  значение2</summary>
+                <p>имеет три аргумента</p>
+                <pre>
+  <code>
+let result = условие ? значение1 : значение2;
+  </code>
+</pre>
+                <p>Сначала вычисляется условие: если оно истинно, тогда возвращается значение1, в противном случае –
+                  значение2.</p>
+
+                <pre>
+  <code>
+let accessAllowed = (age &gt; 18) ? true : false;
+  </code>
+</pre>
+                <p>Технически, мы можем опустить круглые скобки вокруг age &gt; 18. Оператор вопросительного знака
+                  имеет
+                  низкий
+                  приоритет,
+                  поэтому он выполняется после сравнения &gt;.</p>
+                <pre>
+  <code>
+let accessAllowed = age &gt; 18 ? true : false;
+  </code>
+</pre>
+
+                <p>обычная последовательная проверка</p>
+                <pre>
+  <code>
+let age = prompt('Возраст?', 18);
+
+let message = (age &lt; 3) ? 'Здравствуй, малыш!' : 
+              (age &lt; 18) ? 'Привет!' : 
+              (age &lt; 100) ? 'Здравствуйте!' : 'Какой необычный возраст!' ; 
+
+alert( message );     
+  </code>
+</pre>
+
+
+                <pre>
+  <code>
+Вот как это выглядит при использовании if..else:
+
+if (age &lt; 3) { 
+  message='Здравствуй, малыш!' ; 
+} else if (age &lt; 18) { 
+  message='Привет!' ; 
+} else if (age &lt; 100) {
+  message='Здравствуйте!' ; 
+} else { 
+  message='Какой необычный возраст!' ; 
+}
+  </code>
+</pre>
+
+              </details>
+
+              <details class="show-piece">
+                <summary><code>|| - или</code> -- возвращает первое истинное значение или последнее</summary>
+                <pre>
+  <code>
+result = a || b; //если первый операнд вернет true то второй не вычисляется
+  </code>
+</pre>
+                <p>Существует всего четыре возможные логические комбинации:</p>
+                <pre>
+  <code>
+alert( true || true );   // true
+alert( false || true );  // true
+alert( true || false );  // true
+alert( false || false ); // false
+  </code>
+</pre>
+                <p>Если значение не логического типа, то оно к нему приводится в целях вычислений.</p>
+                <pre>
+  <code>
+    цепочка ИЛИ || возвращает первое истинное значение или последнее, если такое значение не найдено.
+
+let currentUser = null;
+let defaultUser = "John";
+
+let name = currentUser || defaultUser || "unnamed";
+
+alert( name ); // выбирается "John" – первое истинное значение
+
+Если бы и currentUser, и defaultUser были ложными, в качестве результата мы бы наблюдали "unnamed".
+  </code>
+</pre>
+
+                <p>ИЛИ || вычисляет слева направо. Вычисление останавливается при достижении первого истинного
+                  значения.
+                  Этот
+                  процесс
+                  называется «сокращённым вычислением», поскольку второй операнд вычисляется только в том случае,
+                  если
+                  первого
+                  недостаточно для вычисления всего выражения.</p>
+                <pre>
+  <code>
+let x;
+
+true || (x = 1);
+
+alert(x); // undefined, потому что (x = 1) не вычисляется
+
+Если бы первый аргумент имел значение false, то || приступил бы к вычислению второго и выполнил операцию присваивания:
+
+let x;
+
+false || (x = 1);
+
+alert(x); // 1
+
+
+этот вариант использования || является "аналогом if". Первый операнд преобразуется в логический. Если он оказывается
+ложным, начинается вычисление второго.
+  </code>
+</pre>
+              </details>
+
+
+
+
+
+              <details class="show-piece">
+                <summary><code>&& - и</code> -- находит первое ложное значение</summary>
+
+                <p>возвращает true, если оба аргумента истинны, а иначе – false</p>
+                <pre>
+  <code>
+result = a && b; 
+
+alert( true && true ); // true
+alert( false && true ); // false
+alert( true && false ); // false
+alert( false && false ); // false
+  </code>
+</pre>
+
+                <p>Если все операнды были истинными, возвращается последний.</p>
+                <p>Другими словами, И возвращает первое ложное значение. Или последнее, если ничего не найдено.</p>
+                <pre>
+  <code>
+    Если первый операнд ложный, && возвращает его. 
+          Второй операнд игнорируется
+alert( null && 5 ); // null
+alert( 0 && "no matter what" ); // 0
+
+alert( 1 && 2 && null && 3 ); // null
+
+alert( 1 && 2 && 3 ); // 3
+  </code>
+</pre>
+
+              </details>
+
+
+
+
+
+              <details class="show-piece">
+                <summary><code></code></summary>
+
+              </details>
+
+
+
+
+              <details class="show-piece">
+                <summary><code></code></summary>
+
+              </details>
+
+
+
+            </details>
+          </section>
+
+          <section class="export-import">
+            <details class="show-block ">
+              <summary><code>export-import</code></summary>
+
+              <p><b>import</b> <em>дефолтные через запятую</em><b>,</b> { <em>именованные через запятую</em> } откуда
+                "./... .js"
+              </p>
+
+              <div class="export-import__box">
+
+                <pre><code>
+<b>Основной файл</b>
+  
+          
+import del, { sum, show, color } from "./func.js";
+        
+
+
+color(elem);
+    
+sum(4, 1);
+    
+show(elem);
+
+del(elem);
+    <hr>  
+<b>переименование</b>
+
+import del as  delete, { * as <span style="color: red;">name</span> } from "./func.js";
+import del теперь delete, { все теперь <span style="color: red;">name</span> } из "./func.js";
+
+функции стали как свойства объекта <span style="color: red;">name</span>
+но не все а только те которые мы
+объединили в объект <ins> * as name</ins>
+
+
+<span style="color: red;">name</span>.color(elem);
+  
+<span style="color: red;">name</span>.sum(4, 1);
+
+<span style="color: red;">name</span>.show(elem);
+
+delete(elem); //не свойсво объекта <span style="color: red;">name</span>
+</code></pre>
+
+                <pre><code>
+<b>Дополнительный файл</b>
+  
+  
+let sum = function (a, b) { ... }
+let show = function (elem) { ... }
+
+export let color = function() { ... }
+  
+export default function del(elem) { ... }
+  
+
+
+      
+объявленный экспорт снизу не перечисляется:  
+
+export { sum, show };
+</code></pre>
+              </div>
+
+            </details>
+          </section>
+
+
+
+          <section class="js__events">
+            <h2>События</h2>
+
+            <a href="https://www.youtube.com/watch?v=bWCzbR5DvCo&t=908s" target="_blank"
+              rel="noopener noreferrer">источник
+              источник
+              источник источник источник</a>
+            <p>каждое событие имеет свой объект свойств с которыми можно взаимодействовать.</p>
+            <pre><code>
+clientX : 273
+clientY : 508
+offsetX : 100
+offsetY : 77
+
+code : "KeyS"
+composed : true
+ctrlKey : false
+currentTarget : null
+defaultPrevented : false
+key : "s"
+</code></pre>
+            <p>их можно вытащить при помощи event</p>
+            <p>какое событие будет указано такой объект и выдаст консоль со всеми свойствами этого события</p>
+
+            <pre><code>
+document.onmouseleave = (event) =&gt; {
+  console.log(event);
+}
+
+document.onmousemove = (event) =&gt; {
+  console.log(event);
+}
+
+document.onkeydown = (event) =&gt; {
+  console.log(event);
+}
+
+
+document.onclick = (event) =&gt; {
+  console.log(event);         //все детали события (и список всех событий)
+  console.log(event.type);    //тип события
+  console.log(event.target);  //объект на котором сработало событие(всплытие/погружение)
+  console.log(event.currentTarget); //объект которому назначен обработчик
+  
+  console.log(event.offsetX);
+  console.log(event.offsetY);
+}
+  </code>
+</pre>
+
+
+
+
+            <!-- <details class="show-block ">
+              <summary><code></code></summary>
+
+              <details class="show-piece">
+                <summary><code></code> </summary>
+
+              </details>
+
+            </details> -->
+
+          </section>
+
+
+
+
+        </div>
+      </section> <!-- js -->
+
+    </main>
+
+    @@include('html/footer.html', {})
+
+  </div> <!-- wrapper -->
+  <script src="js/app.min.js"></script>
+</body>
+
+</html>

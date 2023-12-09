@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+@@include('html/head.html', {
+"title": "svg"
+})
+
+<body>
+  <div class="wrapper">
+
+    @@include('html/header.html', {})
+
+    <main class="page--main">
+
+      <section class="svg">
+        <div class="container">
+
+          <h1>svg</h1>
+
+          <section class="svg">
+
+            <section class="svg__item">
+
+              <a href="http://css.yoksel.ru/svg-groups-use/" target="_blank"
+                rel="noopener noreferrer">http://css.yoksel.ru/svg-groups-use/</a>
+
+              <p>Данные, включённые в атрибут d, описывают команды для path: moveto, line, curve, arc и closepath.</p>
+
+
+              <p>Для создания контура используется элемент &lt;path&gt;.</p>
+              <p>В качестве данных контура используются следующие команды:</p>
+              <ul class="list-reset">
+                <li>M = переместить указатель</li>
+                <li>L = нарисовать линию</li>
+                <li>H = нарисовать горизонтальную линию</li>
+                <li>V = нарисовать вертикальную линию</li>
+                <li>C = нарисовать кубическую кривую Безье с двумя контрольными точками</li>
+                <li>S = нарисовать сглаженную кубическую кривую Безье с одной контрольной точкой</li>
+                <li>Q = нарисовать квадратичную кривую Безье с одной контрольной точкой</li>
+                <li>T = нарисовать сглаженную квадратичную кривую Безье. Контрольной точкой будет отражение контрольной
+                  точки предыдущей команды.</li>
+                <li>A = нарисовать эллиптическую кривую</li>
+                <li>Z = закрыть контур</li>
+              </ul>
+
+              <p><b>Примечание: Если команда записана
+                  большими буквами, то позиционирование будет абсолютным. Если маленькими буквами, то позиционирование
+                  будет относительным.</b></p>
+
+              <h4>moveto</h4>
+
+              <p>Команды moveto (М или м) устанавливают новые точки, как будто мы поднимаем ручку и начинаем рисовать в
+                новом месте на листе бумаги. Строка кода, составляющего данные path, должна начинаться с команды moveto,
+                как показано выше в примере с лаймом.</p>
+              <p>Команды moveto, которые следуют за исходной, представляют собой начало нового фрагмента контура,
+                создавая
+                составной контур. Заглавная М указывает, что после нее идут абсолютные координаты, тогда как строчная m
+                указывает на
+                относительные
+                координаты.</p>
+
+              <h4>closepath</h4>
+
+              <p>Closepath (Z и z) заканчивает текущий фрагмент контура приводит к рисованию прямой линии от текущей
+                точки
+                до начальной.</p>
+            </section>
+
+            <section class="how-to-insert">
+
+              <details class="show-piece">
+                <summary><code>Как вставить?</code></summary>
+
+                <p>Если хочется выжать максимум из SVG, используйте object. В качестве альтернативы подходит встроенный
+                  SVG,
+                  который не повлияет на HTTP-запрос, но не будет кешироваться.</p>
+
+                <details class="show-piece">
+                  <summary><code>object -- </code>лучший вариант, если вам нужно изменять SVG, не
+                    встраивая его в HTML</summary>
+                  <pre>
+  <code>
+&lsaquo;object type="image/svg+xml" data="img/image.svg"&rsaquo;Your browser does not support SVGs&lsaquo;/object&rsaquo;
+  </code>
+</pre>
+                  <p>
+                    Oбъект, вставленный с помощью object, — это другой документ, и css-правила объемлющего документа на
+                    него
+                    не распространяются, но его css-свойствами можно управлять извне при помощи JS.
+                  </p>
+                </details>
+
+                <details class="show-piece use">
+                  <summary><code>use -- </code>обратиться к части элемента</summary>
+                  <p>В элементе use мы обращаемся к каждой части svg через id который указан в symbol.
+                  </p>
+                  <pre>
+  <code>
+  если svg лежит инлайново в html
+
+&lt;svg class="icon"&gt;
+  &lt;use xlink:href="#svg-2"&gt;&lt;/use&gt;
+&lt;/svg&gt;
+
+  спрайт 
+
+&lt;svg class="icon"&gt;
+  &lt;use xlink:href="../img/sprite.svg#svg-2"&gt;&lt;/use&gt;
+&lt;/svg&gt;
+
+
+
+&lt;svg xmlns="http://www.w3.org/2000/svg"&gt;
+
+  &lt;defs&gt;  
+    &lt;symbol viewBox="0 0 21 22" id="<span style="color: tomato;">src-1</span>"&gt; ... &lt;/symbol&gt;
+    &lt;symbol viewBox="0 0 21 18" id="<span style="color: blue;">src-2</span>"&gt; ... &lt;/symbol&gt;
+    &lt;symbol viewBox="0 0 21 22" id="<span style="color: rgb(214, 188, 45);">src-3</span>"&gt; ... &lt;/symbol&gt;
+  &lt;/defs&gt;
+
+  &lt;use xlink:href="#<span style="color: tomato;">src-1</span>"&gt;&lt;/use&gt;  
+  &lt;use xlink:href="#<span style="color: blue;">src-2</span>"&gt;&lt;/use&gt;
+  &lt;use xlink:href="#<span style="color: rgb(214, 188, 45);">src-3</span>"&gt;&lt;/use&gt;
+
+&lt;/svg&gt;
+
+  </code>
+</pre>
+
+                </details>
+
+                <details class="show-piece img">
+                  <summary><code>img -- </code>возможности преобразований в этом формате ограничены</summary>
+                  <p>Можно даже
+                    использовать SVG как элемент &lsaquo;picture&rsaquo;</p>
+                  <pre>
+  <code>
+&lsaquo;img src="img/image.svg" alt=""&rsaquo;
+  </code>
+</pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>iframe -- </code>не лучший вариант использования</summary>
+                  <p>Это позволит сделать многое,
+                    но я не уверен, что это лучший вариант использования</p>
+                  <pre>
+  <code>
+&lsaquo;iframe src="img/image.svg"&rsaquo;Your browser does not support iframes&lsaquo;/iframe&rsaquo;
+  </code>
+</pre>
+                </details>
+
+                <details class="show-piece">
+                  <summary><code>embed</code></summary>
+                  <p>применяется «во внешних приложениях» или «в интерактивном контенте». Вы можете использовать это для
+                    SVG,
+                    но лучше не стоит.</p>
+                  <pre>
+  <code>
+&lsaquo;embed type="image/svg+xml" src="img/image.svg" /&rsaquo;
+  </code>
+</pre>
+                </details>
+
+              </details>
+
+            </section>
+
+            <section class="svg-inline">
+              <h2>sprite</h2>
+              <p>Проблема инлайнового svg в том что браузер не может его кэшировать. Если имеется
+                большой спрайт то намного выгодней его кэшировать(поместить файл.svg не вставлять код в html а в
+                картинки
+                и
+                вытаскивать от туда).</p>
+
+              <details class="show-piece">
+                <summary><code>спрайт в html</code></summary>
+
+                <pre>
+  <code>
+Вставляем спрайт на странице html и скрываем элемент svg потому 
+что, svg по дефолту занимает место 150x300
+
+                                        прячем спрайт
+&lt;svg xmlns="http://www.w3.org/2000/svg" <span style="color: tomato;">display="none"</span>&gt;
+
+  &lt;defs&gt;  блок defs и symbol не отображаются
+
+    &lt;symbol viewBox="0 0 21 22" id="src-1"&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+    &lt;/symbol&gt;
+
+    &lt;symbol viewBox="0 0 21 18" id="<span style="color: tomato;">src-2</span>"&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+    &lt;/symbol&gt;
+
+    &lt;symbol viewBox="0 0 21 22" id="src-3"&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+    &lt;/symbol&gt;
+
+  &lt;/defs&gt;
+
+&lt;/svg&gt;
+
+В нутри спрайта расположены картинки в тегах symbol, у
+каждой свой id для обращения к конкретной отдельно.
+
+&lt;svg&gt;
+  &lt;use xlink:href="#<span style="color: tomato;">svg-2</span>"&gt;&lt;/use&gt;
+&lt;/svg&gt;
+  </code>
+</pre>
+                <p>Обращаться к элементам можно внутри структуры svg ведь defs и symbol не отображаются
+                </p>
+                <pre>
+  <code>
+  не скрываем svg что бы use не скрыть
+  он же используется в этом же svg
+    
+&lt;svg xmlns="http://www.w3.org/2000/svg"&gt;
+
+  &lt;defs&gt;  
+
+    &lt;symbol viewBox="0 0 21 22" id="<span style="color: tomato;">src-1</span>"&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+    &lt;/symbol&gt;
+
+    &lt;symbol viewBox="0 0 21 18" id="<span style="color: blue;">src-2</span>"&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+    &lt;/symbol&gt;
+
+    &lt;symbol viewBox="0 0 21 22" id="<span style="color: rgb(214, 188, 45);">src-3</span>"&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+      &lt;path d="..." fill="#000000" /&gt;
+    &lt;/symbol&gt;
+
+  &lt;/defs&gt;
+
+
+  &lt;use xlink:href="#<span style="color: tomato;">src-1</span>"&gt;&lt;/use&gt;  
+
+  &lt;use xlink:href="#<span style="color: blue;">src-2</span>"&gt;&lt;/use&gt;
+
+  &lt;use xlink:href="#<span style="color: rgb(214, 188, 45);">src-3</span>"&gt;&lt;/use&gt;
+
+&lt;/svg&gt;
+
+  </code>
+</pre>
+
+              </details>
+
+              <details class="show-piece">
+                <summary><code>спрайт в отдельном файле</code></summary>
+                <p>Почти то же что и выше но сам svg помещается в отдельный файл <code>sprite.svg</code> и уже от туда
+                  вытаскиваются его части при помощи тега <code>use</code></p>
+
+                <pre>
+  <code>
+в папку с картинками закидываем файл sprite.svg
+img --|
+      |-img.png
+      |-img.png
+      |-sprite.svg
+
+в файле html вытаскиваем части из файла sprite.svg
+
+&lt;svg&gt;
+  &lt;use href="../img/sprite.svg#id<sup>тут идет id symbol</sup> "&gt;&lt;/use&gt;
+&lt;/svg&gt;
+
+</code>
+</pre>
+
+              </details>
+
+            </section>
+
+            <section class="cdata">
+
+              <details class="show-block ">
+                <summary><code>&lt;![CDATA[ ...]]&gt;</code></summary>
+                <p>Есть два способа изменить стили — во встроенном SVG и через внешнее подключение (например, в списке
+                  стилей). Чтобы
+                  встроить стили, оберните их в тег &lsaquo;style&rsaquo;
+                  и также внутри &lsaquo; ![CDATA[ ...]]&rsaquo;. Лучше делать именно так,
+                  потому что иногда XML анализаторы могут конфликтовать с определённым символами (например &rsaquo; ).
+                  Даже
+                  если у
+                  вас нет шибко модных символов сейчас,
+                  лучше всё равно использовать CDATA,
+                  вдруг позже они появятся и всё сломают.</p>
+
+                <pre>
+              <code>
+            &lsaquo;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 65"&rsaquo;
+              &lsaquo;style type="text/css"&rsaquo;
+                &lsaquo;![CDATA[
+                
+                .firstb {
+                  fill: #000;
+                  transition: fill 0.1s;
+                }
+                
+                .firstb:hover {
+                  fill: #4e86b1;
+                }
+            
+                ]]&rsaquo;
+              &lsaquo;/style&rsaquo;
+            &lsaquo;/svg&rsaquo;
+              </code>
+            </pre>
+              </details>
+            </section>
+
+            <section class="viewport-vievBox">
+
+              <details class="show-block ">
+                <summary><code>viewport и vievBox</code></summary>
+                <div class="svgBoxOne">
+                  <img src="img/svgAnimOne.jpg" alt="">
+                </div>
+
+                <p>Если вьюпорт меньше вьюбокса, то он уменьшит весь вьюбокс и покажет все что окажется во вьюпорте</p>
+                <div class="svgBoxTwo">
+                  <img src="img/svgAnimTwo.jpg" alt="">
+                </div>
+
+                <p>Если вьюпорт больше вьюбокса то он увеличит весь вьюбокс и покажет все что окажется во вьюпорте</p>
+                <div class="svgBoxThree">
+                  <img src="img/svgAnimThree.jpg" alt="">
+                </div>
+
+
+                <p>Если не указан атрибут preserveAspectRatio, вьюпорт будет показывать весь вьюбокс(если вьюбокс больше
+                  то
+                  он его уменьшит что бы он весь влез):</p>
+                <div class="svgBoxFour">
+                  <img src="img/svgAnimFour.jpg" alt="">
+                </div>
+
+              </details>
+            </section>
+
+            <section class="preserveAspectRatio">
+              <details class="show-block ">
+                <summary><code>preserveAspectRatio</code></summary>
+                <pre>
+  <code>
+            
+&lt;svg preserveAspectRatio="align meetOrSlice"&gt;
+  &lt;use href="#id" /&gt;
+&lt/svg&gt;
+            
+  </code>
+</pre>
+                <p>preserveAspectRatio определяет правило, как пользовательский агент совмещает вьюборт и вьюбокс.
+                  Принимает два параметра align и meetOrSlice.</p>
+
+                <p>align - указывает как распологается вьюбокс отновительно вьюпорта. Принимает 9 параметров(в какой
+                  части
+                  совмещать вьюпорт и вьюбокс)</p>
+                <img src="img/preserve.jpg" alt="">
+                <p>xMin - по оси Х минимальное значение т.е. левый край</p>
+                <p>yMid - по оси Y центр.</p>
+                <p>mid - center</p>
+                <p>max - максимальное значение т.е. низ и право</p>
+
+
+                <p>meetOrSlice - определяет должен ли вьюбокс полностью помещаться в нутрь окна просмотра(вьюпорт), или
+                  же
+                  только частично.</p>
+
+                <figure>
+                  <img src="img/slice.png" alt="">
+                  <figcaption>slice: показать кусок(только viewBox) svg в вьюпорте.</figcaption>
+                </figure>
+
+
+                <figure>
+                  <img src="img/meet.png" alt="">
+                  <figcaption>meet: показать весь svg в вьюпорте.</figcaption>
+                </figure>
+
+              </details>
+            </section>
+
+            <section class="animation">
+              <details class="show-block ">
+                <summary><code>animation</code></summary>
+                <h2>анимация path</h2>
+                <p>Получить длину path можно с помощью метода <code>path.getTotalLength();</code></p>
+
+                <pre>
+<code>
+var path = document.querySelector('.path');
+var length = path.getTotalLength();
+</code>
+</pre>
+
+                <h4>Если данный метод не поддерживается то можно самому установить значение длины</h4>
+                <pre>
+<code>
+&lt;path d="..." pathLength="1" /&gt;
+</code>
+</pre>
+                <p>Это ничего не делает само по себе. Путь по прежнему отрисовывается целиком, как будто вы ничего не
+                  делали,
+                  только
+                  теперь
+                  длины пути основана на значении от 0 до 1.
+                  Теперь мы можем установить значение stroke-dasharray и 1 анимировать смещение в CSS!</p>
+                <pre>
+<code>
+&lt;svg class="home" &gt;
+  &lt;path d=" ... " <span style="color: red;">pathlength="1"</span> /&gt;
+  &lt;line <span style="color: red;">pathlength="1"</span> x1=".." y1=".." x2=".." y2=".." /&gt;
+  &lt;line <span style="color: red;">pathlength="1"</span> x1=".." y1=".." x2=".." y2=".." /&gt;
+&lt;/svg&gt;
+            
+            
+svg.home:hover {
+  animation-name: home-anim;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+svg.home {
+  fill: none;
+  stroke: black;
+
+
+  animation-fill-mode: forwards;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  stroke-linecap: round;
+
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
+}
+
+svg.home .top,
+svg.home .bottom {
+  stroke-width: 2px;
+}
+
+@keyframes home-anim {
+
+  0% {
+    stroke-dashoffset: 1;
+  }
+
+  50% {
+    stroke-dasharray: 1.1;
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 1;
+  }
+
+}
+  </code>
+</pre>
+
+
+                <svg class="home" width="600" height="600" viewbox="0 0 24 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+
+                  <path class="circle" pathlength="1"
+                    d="M14.5 8.5C14.5 9.60457 13.6046 10.5 12.5 10.5C11.3954 10.5 10.5 9.60457 10.5 8.5C10.5 7.39543 11.3954 6.5 12.5 6.5C13.6046 6.5 14.5 7.39543 14.5 8.5Z" />
+
+                  <path class="top" pathlength="1"
+                    d="M1 12.5L11.2763 2.22374C11.6732 1.82678 12.3191 1.83429 12.7067 2.24037L22.5 12.5" />
+
+                  <path class="dor" pathlength="1"
+                    d="M6 20V14C6 13.4477 6.44772 13 7 13H10C10.5523 13 11 13.4477 11 14V20C11 20.5523 10.5523 21 10 21H7C6.44772 21 6 20.5523 6 20Z" />
+
+                  <path class="bottom" pathlength="1"
+                    d="M4 10V21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21V16V10" />
+
+                  <path class="window" pathlength="1"
+                    d="M14.5 12.5H17.5C17.7761 12.5 18 12.7239 18 13V17C18 17.2761 17.7761 17.5 17.5 17.5H14.5C14.2239 17.5 14 17.2761 14 17V13C14 12.7239 14.2239 12.5 14.5 12.5Z" />
+
+                  <line pathlength="1" x1="16.5" y1="17" x2="16.5" y2="13" />
+                  <line pathlength="1" x1="14" y1="14.5" x2="16" y2="14.5" />
+
+                  <line pathlength="1" class="dor-2" x1="9.5" y1="17" x2="9.5" y2="18" />
+
+                </svg>
+
+              </details>
+            </section>
+
+            <section class="smil-animation">
+              <details class="show-block ">
+                <summary><code>smil-animation</code></summary>
+                <h3>svg smil animate</h3>
+                <p>Смил анимация пишется внутри svg, она анимирует атрибуты svg при помощи тега animate</p>
+                <p>Атрибут animate указывается внутри path</p>
+                <p>Изменяем одну и ту же фигуру(делаем разную форму), не изменяя количество точек, после этого ставим их
+                  поочередно
+                  в path и анимируем последний.</p>
+                <p>Что бы не было перескока с последнего на первый надо последним сделать первый path, т.e. первый и
+                  последний
+                  это
+                  один и тот же path</p>
+                <p>В последнем path нужно указать fill</p>
+                <p>Вот так:</p>
+
+                <pre>
+  <code>
+&lt;svg xmlns="http://www.w3.org/2000/svg"&gt;
+    
+1 &lt;path
+   d="..."
+   fill="transparent" /&gt;
+    
+2 &lt;path
+   d="..."
+   fill="transparent" /&gt;
+    
+3 &lt;path
+   d="..."
+   fill="transparent" /&gt;
+    
+1 &lt;path&gt;               этот path делаем двойным &lt;path&gt;&lt;/path&gt; т.к. animate aнимирует path
+   d="..."                если написать animate снаружи path то что он будет анимировать???
+   fill="lightblue"&gt;
+    
+  &lt;animate&gt;  внутри animete перечисление изменений
+     attributeName="d" 
+     dur="10s" 
+     repeatCount="indefinite"
+     values="       перечисляем path указанные сверху
+     M150 133.5C150 ...;         первый и последний одинаковы что бы не было перескока при конце анимации
+     M251.748 148C251.748 ...;   
+     M206.5 123.887C206.5 ...;
+     M260.138 126.5C260.138 ...;
+     M210.721 138C210.721 ...;
+     M258.5 124C258.5 193.036 ...;
+     M150 133.5C150 ...;
+     "/&gt;
+  &lt;/animate&gt;
+    
+&lt;/path&gt;
+    
+&lt;/svg&gt;
+  </code>
+</pre>
+
+
+                <h3>Пример smil анимации</h3>
+
+                <svg width="263" height="263" viewBox="0 0 263 263" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M251.748 148C251.748 217.036 203.536 210 134.5 210C65.4644 210 1.74817 217.036 1.74817 148C1.74817 78.9644 57.7126 66.5 126.748 66.5C195.784 66.5 251.748 78.9644 251.748 148Z"
+                    fill="transparent" />
+                  <path
+                    d="M206.5 123.887C206.5 192.923 191.535 261 122.5 261C53.4643 261 47 208.423 47 139.387C47 70.3516 72.4643 0 141.5 0C210.535 0 206.5 54.8516 206.5 123.887Z"
+                    fill="transparent" />
+                  <path
+                    d="M260.138 126.5C260.138 195.536 265.036 160 196 160C126.964 160 71 239.036 71 170C71 100.964 126.964 45 196 45C265.036 45 260.138 57.4644 260.138 126.5Z"
+                    fill="transparent" />
+                  <path
+                    d="M210.721 138C210.721 207.036 154.757 263 85.7212 263C16.6856 263 103.221 257.036 103.221 188C103.221 118.964 16.6856 13 85.7212 13C164.221 103 210.721 68.9644 210.721 138Z"
+                    fill="transparent" />
+                  <path
+                    d="M258.5 124C258.5 193.036 283.036 180.5 214 180.5C144.964 180.5 160 183.036 160 114C160 44.9644 99.4644 29.5 168.5 29.5C237.536 29.5 258.5 54.9644 258.5 124Z"
+                    fill="transparent" />
+                  <path
+                    d="M185 213.5C185 282.536 114.036 249 45 249C-24.0356 249 45 236.536 45 167.5C45 98.4644 96.4643 11 165.5 11C234.535 11 185 144.464 185 213.5Z"
+                    fill="transparent" />
+                  <path
+                    d="M241.5 216.816C241.5 285.852 203.036 245.316 134 245.316C64.9644 245.316 9 189.352 9 120.316C9 51.2808 25.9644 145.316 95 145.316C164.036 145.316 241.5 147.781 241.5 216.816Z"
+                    fill="transparent" />
+                  <path
+                    d="M189 180C189 249.036 212.536 216.5 143.5 216.5C74.4644 216.5 52.4999 240.036 52.4999 171C52.4999 101.964 86.4643 45 155.5 45C224.535 45 189 110.964 189 180Z"
+                    fill="transparent" />
+                  <circle r="20" fill="red"> </circle>
+                  <path
+                    d="M150 133.5C150 202.536 157.036 228.5 88 228.5C18.9644 228.5 4.9998 197.036 4.9998 128C4.9998 58.9644 -19.5356 34 49.5 34C118.536 34 150 64.4644 150 133.5Z"
+                    fill="lightblue">
+
+                    <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                      values="
+          M150 133.5C150 202.536 157.036 228.5 88 228.5C18.9644 228.5 4.9998 197.036 4.9998 128C4.9998 58.9644 -19.5356 34 49.5 34C118.536 34 150 64.4644 150 133.5Z;
+          M251.748 148C251.748 217.036 203.536 210 134.5 210C65.4644 210 1.74817 217.036 1.74817 148C1.74817 78.9644 57.7126 66.5 126.748 66.5C195.784 66.5 251.748 78.9644 251.748 148Z;
+          M206.5 123.887C206.5 192.923 191.535 261 122.5 261C53.4643 261 47 208.423 47 139.387C47 70.3516 72.4643 0 141.5 0C210.535 0 206.5 54.8516 206.5 123.887Z;
+          M260.138 126.5C260.138 195.536 265.036 160 196 160C126.964 160 71 239.036 71 170C71 100.964 126.964 45 196 45C265.036 45 260.138 57.4644 260.138 126.5Z;
+          M210.721 138C210.721 207.036 154.757 263 85.7212 263C16.6856 263 103.221 257.036 103.221 188C103.221 118.964 16.6856 13 85.7212 13C164.221 103 210.721 68.9644 210.721 138Z;
+          M258.5 124C258.5 193.036 283.036 180.5 214 180.5C144.964 180.5 160 183.036 160 114C160 44.9644 99.4644 29.5 168.5 29.5C237.536 29.5 258.5 54.9644 258.5 124Z;
+          M185 213.5C185 282.536 114.036 249 45 249C-24.0356 249 45 236.536 45 167.5C45 98.4644 96.4643 11 165.5 11C234.535 11 185 144.464 185 213.5Z;
+          M241.5 216.816C241.5 285.852 203.036 245.316 134 245.316C64.9644 245.316 9 189.352 9 120.316C9 51.2808 25.9644 145.316 95 145.316C164.036 145.316 241.5 147.781 241.5 216.816Z;
+          M150 133.5C150 202.536 157.036 228.5 88 228.5C18.9644 228.5 4.9998 197.036 4.9998 128C4.9998 58.9644 -19.5356 34 49.5 34C118.536 34 150 64.4644 150 133.5Z;">
+                    </animate>
+                  </path>
+
+                </svg>
+
+                <p><a href="https://www.youtube.com/watch?v=meD4fFX9jKQ&t=3s" target="_blank"
+                    rel="noopener noreferrer">Ссылка на
+                    анимацию выше</a></p>
+
+              </details>
+            </section>
+
+            <section class="mask-image">
+              <details class="show-block ">
+                <summary><code>mask-image</code></summary>
+                <p>mask-image:</p>
+
+                <ul>
+                  <li>mask-clip</li>
+                  <li>mask-composite</li>
+                  <li>mask-image</li>
+                  <li>mask-mode</li>
+                  <li>mask-origin</li>
+                  <li>mask-position</li>
+                  <li>mask-repeat</li>
+                  <li>mask-size</li>
+                </ul>
+
+                <ul>
+                  <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/mask" target="_blank"
+                      rel="noopener noreferrer">mozila</a>
+                  </li>
+                  <li>
+                    <a href="https://www.w3schools.com/css/css3_masking.asp">Маскировка CSS</a>
+                  </li>
+                </ul>
+
+
+                <img class="mask-image__one" src="img/1.avif" alt="">
+
+                <pre>
+  <code>
+.mask-image__one{
+  mask-image: url(../img/mask-image-one.svg);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+  </code>
+</pre>
+
+                <p>Вы также можете определить любую произвольную форму и присвоить ее как значение clip-path. в разметке
+                  SVG
+                  просто
+                  оберните фигуру в элемент clipPath, а затем оберните clipPath в блок defs что бы скрыть его в html.
+                </p>
+
+                <p>Например:</p>
+
+                <svg width="0" height="0">
+                  <defs>
+                    <clipPath id="pathSvg-1">
+
+                      <polygon stroke="black" fill="none" points="50,0 21,90 98,35 2,35 79,90" />
+
+                    </clipPath>
+                  </defs>
+                </svg>
+
+                <img class="mask-image__two" src="img/1.png" alt="">
+
+
+                <ul>
+                  <li>
+                    <img class="mask-image-2" src="img/3.png" alt="">
+                  </li>
+                  <li>
+                    <img class="mask-image-3" src="img/3.png" alt="">
+                  </li>
+                  <li>
+                    <img class="mask-image-4" src="img/3.png" alt="">
+                  </li>
+                </ul>
+              </details>
+
+            </section>
+
+            <section class="figures">
+
+              <details class="show-block ">
+                <summary><code>figures</code></summary>
+                <hgroup>
+                  <h3>rect</h3>
+                  <h4>Для создания прямоугольника и различных его вариаций используется элемент &lt;rect&gt;:</h4>
+                </hgroup>
+                <pre>
+  <code>
+&lt;svg width="400" height="180"&gt;
+  &lt;rect 
+    x="50" y="20" 
+    width="150" height="150" 
+    style="
+      fill:blue;
+      stroke:pink;
+      stroke-width:5;
+      fill-opacity:0.1;
+      stroke-opacity:0.9" 
+    /&gt;
+&lt;/svg&gt;
+<svg width="400" height="180">
+  <rect x="50" y="20" width="150" height="150" style="fill:blue; stroke:pink; stroke-width:5; fill-opacity:0.1; stroke-opacity:0.9" />
+</svg>
+  </code>
+</pre>
+
+
+
+
+                <p>width и height элемента &lt;rect&gt; определяют ширину и высоту прямоугольника</p>
+                <p>style определяет CSS свойства прямоугольника</p>
+                <p>fill определяет цвет заливки прямоугольника</p>
+                <p>stroke-width определяет толщину рамки прямоугольника</p>
+                <p>stroke определяет цвет рамки прямоугольника</p>
+                <p>x определяет позицию прямоугольника слева (например, x="50" помещает прямоугольник в 50px от левого
+                  отступа)</p>
+                <p>y определяет позицию прямоугольника сверху (например, y="20" помещает прямоугольник в 20px от
+                  верхнего
+                  отступа)</p>
+                <p>Атрибуты rx и ry закругляют углы прямоугольника</p>
+                <p>opacity определяет значение прозрачности для всего элемента (допустимый диапазон: от 0 до 1)</p>
+                <p>fill-opacity определяет прозрачность цвета заливки (допустимый диапазон: от 0 до 1)</p>
+                <p>stroke-opacity определяет прозрачность цвета прорисовки (допустимый диапазон: от 0 до 1)</p>
+
+
+                <p>Также есть возможность создать закруглённые углы, указав значения в атрибутах rx и ry. К примеру,
+                  rx="5"
+                  ry="10"
+                  сгенерирует горизонтальные стороны углов с радиусом 5px, а вертикальные в 10px.</p>
+
+                <svg width="400" height="180">
+                  <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
+                    style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+                </svg>
+
+                <h3>circle</h3>
+                <p>Координаты cx и cy определяют положение центра круга относительно размеров рабочей области, заданных
+                  элементом &lt;svg&gt;.</p>
+                <p>Атрибут r устанавливает размер внешнего радиуса.</p>
+                <pre>
+  <code>
+<svg>
+  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#ED6E46" />
+</svg>
+&lt;svg&gt;
+  &lt;circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#ED6E46" /&gt;
+&lt;/svg&gt;
+  </code>
+</pre>
+                <p>Координаты cx и cy определяют положение центра круга относительно размеров рабочей области, заданных
+                  элементом &lt;svg&gt;.</p>
+                <p>Если атрибуты cx и cy не определяются, то центр круга устанавливается в координаты (0,0)</p>
+                <p>Атрибут r устанавливает размер внешнего радиуса.</p>
+
+
+                <h3>ellipse</h3>
+                <p>Элемент &lt;ellipse&gt; описывает эллипс, который строится по центральной точке и двум радиусам.</p>
+                <p>Эллипс имеет достаточно близкое отношение к кругу. Разница заключается в том, что у эллипса радиусы
+                  по
+                  горизонтальной и вертикальной оси разные, в то время как у круга они одинаковые.</p>
+                <p>В то время как значения атрибутов cx и cy помещают центральную точку на указанном расстоянии в
+                  пикселях
+                  от
+                  начала SVG-координат, значения rx и ry определяют радиус сторон фигуры.</p>
+
+                <svg>
+                  <ellipse cx="100" cy="100" rx="100" ry="50" stroke="black" stroke-width="3" fill="#7AA20D" />
+                </svg>
+                <pre>
+  <code>
+&lt;svg&gt;
+  &lt';ellipse cx="100" cy="100" rx="100" ry="50" stroke="black" stroke-width="3" fill="#7AA20D" /&gt;
+&lt;/svg&gt;
+  </code>
+</pre>
+                <ul class="list-reset">
+                  <li>cx определяет координату X центра эллипса</li>
+                  <li>cy определяет координату Y центра эллипса</li>
+                  <li>rx определяет горизонтальный радиус</li>
+                  <li>ry определяет вертикальный радиус</li>
+                </ul>
+
+
+
+                <h3>line</h3>
+                <p>Значения атрибутов x1 и y1 устанавливают координаты начала линии, а значения x2 и y2 — определяют
+                  конец
+                  линии.</p>
+                <pre>
+  <code>
+<svg>
+  <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+</svg>
+&lt;svg&gt;
+  &lt;line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" /&gt;
+&lt;/svg&gt;
+  </code>
+</pre>
+                <ul class="list-reset">
+                  <li>x1 определяет координату X стартовой точки линии</li>
+                  <li>y1 определяет координату Y стартовой точки линии</li>
+                  <li>Атрибут x2 определяет координату X конечной точки линии</li>
+                  <li>Атрибут y2 определяет координату Y конечной точки линии</li>
+                </ul>
+
+
+
+                <h3>polyline Ломаная линия</h3>
+                <p>&lt;polyline&gt; определяет набор соединённых отрезков прямой линии, что в результате даёт, как
+                  правило,
+                  незамкнутую фигуру (начало и конец точек которой не связаны).</p>
+                <pre>
+  <code>
+<svg>
+  <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,160" fill="white" stroke="#BBC42A" stroke-width="6" />
+</svg>
+&lt;svg&gt;
+  &lt;polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,160" fill="white" stroke="#BBC42A" stroke-width="6" /&gt;
+&lt;/svg&gt;
+  </code>
+</pre>
+                <p>Значения в points определяют положение фигуры по осям x и y от начала до конца фигуры и разбиты по
+                  парам
+                  x,y во всём
+                  списке значений.</p>
+                <p>Нечётное число точек является ошибкой.</p>
+
+
+
+
+
+
+                <h3>polygon Многоугольник</h3>
+
+                <p>Элемент &lt;polygon&gt; используется для создания графической фигуры, содержащей как минимум три
+                  стороны.
+                </p>
+                <p>Элемент &lt;polygon&gt; определяет замкнутую фигуру состоящую из связанных линий.</p>
+                <pre>
+  <code>
+<svg height="210" width="500">
+  <polygon points="50,5 100,5 125,30 125,80 100,105 50,105 25,80 25,30" fill="#ED6E46" />
+</svg>
+  </code>
+</pre>
+                <p>Вершины многоугольника заданы последовательностью из восьми пар значений х, y.</p>
+                <p>points определяет координаты X и Y каждого угла многоугольника</p>
+
+
+
+                <h3>Элемент path</h3>
+                <p>path представляет собой контур фигуры. Эта фигура может быть заполнена, обведена, использована как
+                  направляющая для текста и/или как контур обрезки.</p>
+                <p>Данные path содержатся в атрибуте d внутри элемента &lt;path&gt;, определяя форму фигуры:</p>
+                <pre>
+  <code>
+&lt;path d="&lt;конкретные данные path&gt;" /&gt;
+  </code>
+</pre>
+                <pre>
+  <code>
+<svg width="258px" height="184px">
+  <path fill="#7AA20D" stroke="#7AA20D" stroke-width="9" stroke-linejoin="round"
+    d="M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,0-0.935-0.021c-10.035,37.291-51.174,65.206-100.414,65.206 c-49.261,0-90.443-27.979-100.435-65.334c-0.765,0.106-1.531,0.149-2.317,0.149c-9.78,0-17.71-7.93-17.71-17.731 c0-9.78,7.93-17.71,17.71-17.71c0.787,0,1.552,0.042,2.317,0.149C39.238,37.084,80.419,9.083,129.702,9.083    c49.24,0,90.379,27.937,100.414,65.228h0.021c0.298-0.021,0.617-0.021,0.914-0.021C240.831,74.29,248.761,82.22,248.761,92z" />
+</svg>
+&lt;svg width="258px" height="184px"&gt;
+  &lt;path fill="#7AA20D" stroke="#7AA20D" stroke-width="9" stroke-linejoin="round"
+    d="M248.761,92c0,9.801-7.93,17.731-17.71,17.731c-0.319,0-0.617,
+    0-0.935-0.021c-10.035,37.291-51.174,65.206-100.414,65.206 c-49.
+    261,0-90.443-27.979-100.435-65.334c-0.765,0.106-1.531,0.149-2.
+    317,0.149c-9.78,0-17.71-7.93-17.71-17.731 c0-9.78,7.93-17.71,17.
+    71-17.71c0.787,0,1.552,0.042,2.317,0.149C39.238,37.084,80.419,9.
+    083,129.702,9.083    c49.24,0,90.379,27.937,100.414,65.228h0.
+    021c0.298-0.021,0.617-0.021,0.914-0.021C240.831,74.29,248.761,82.
+    22,248.761,92z" /&gt;
+&lt;/svg&gt;
+  </code>
+</pre>
+              </details>
+            </section>
+
+            <section class="fill-rule">
+
+              <details class="show-block ">
+                <summary><code>fill-rule</code></summary>
+                <p>Свойство определяет как будут заливаться сложные фигуры, имеющие пересечения внутри себя. Для простых
+                  фигур
+                  ни на что не влияет.</p>
+
+                <svg style="display: none">
+                  <defs>
+                    <symbol id="polygon-nonzero" viewbox="0 0 300 150">
+                      <polygon points="150,10 200,140 70,55 230,55 100,140" />
+                    </symbol>
+
+                    <symbol id="polygon-evenodd" viewbox="0 0 300 150">
+                      <polygon points="150,10 200,140 70,55 230,55 100,140" />
+                    </symbol>
+
+                    <symbol id="circle-nonzero" viewbox="0 0 350 200">
+                      <path
+                        d="M 20,100 A20,20 0 0,1 180,100 M 20,100 A20,20 0 0,0 180,100 M 50,100 A 50,50 0 0,1 150,100 M 50,100 A 50,50 0 0,0 150,100" />
+                    </symbol>
+
+                    <symbol id="circle-evenodd" viewbox="0 0 350 200">
+                      <path
+                        d="M 20,100 A20,20 0 0,1 180,100 M 20,100 A20,20 0 0,0 180,100 M 50,100 A 50,50 0 0,1 150,100 M 50,100 A 50,50 0 0,0 150,100" />
+                    </symbol>
+                  </defs>
+                </svg>
+
+                <figure>
+                  <figcaption>fill-rule="nonzero" по умолчанию</figcaption>
+                  <svg class="polygon-nonzero" width="300" height="150">
+                    <use href="#polygon-nonzero" />
+                  </svg>
+                </figure>
+
+                <figure>
+                  <figcaption>fill-rule="evenodd"</figcaption>
+                  <svg class="polygon-evenodd" width="300" height="150">
+                    <use href="#polygon-evenodd" />
+                  </svg>
+                </figure>
+
+
+                <figure>
+                  <figcaption>fill-rule="nonzero" по умолчанию</figcaption>
+                  <svg class="circle-nonzero" width="300" height="150">
+                    <use href="#circle-nonzero" x="50" />
+                  </svg>
+                </figure>
+
+                <figure>
+                  <figcaption>fill-rule="evenodd"</figcaption>
+                  <svg class="circle-evenodd" width="300" height="150">
+                    <use href="#circle-evenodd" x="50" />
+                  </svg>
+                </figure>
+              </details>
+            </section>
+
+
+            <section class="filter-drop-shadow">
+
+              <details class="show-block ">
+                <summary><code>filter-drop-shadow</code></summary>
+                <h3>даже у тени есть своя тень</h3>
+                <p>Тень в filter: drop-shadow() падает от всех не прозрачных частей, даже от background у png и даже от
+                  border.</p>
+
+                <div class="drop-shadow__inner">
+                  <figure class="drop-shadow__item">
+                    <figcaption>jpg</figcaption>
+                    <img src="img/sun.jpg" alt="drop-shadow image">
+                  </figure>
+
+                  <figure class="drop-shadow__item">
+                    <figcaption>png</figcaption>
+                    <img src="img/sun.png" alt="drop-shadow image">
+                  </figure>
+
+                  <figure class="drop-shadow__item">
+                    <figcaption>svg</figcaption>
+                    <img src="img/sun.svg" alt="drop-shadow image">
+                  </figure>
+                </div>
+
+                <div class="drop-shadow-multiple">
+
+                  <div>
+                    <div></div>
+                  </div>
+
+                  <div>
+                    <div></div>
+                  </div>
+
+                  <div></div>
+
+                </div>
+
+              </details>
+            </section>
+
+
+            <section class="svg-media">
+
+              <details class="show-block ">
+                <summary><code>Svg поддерживает медиавыражения</code></summary>
+                <p>Действительно крутая штука в SVG состоит в том, что если использовать медиавыражения в стилях,
+                  вставленных
+                  внутри файла,
+                  то вместо того, чтобы работать через размер вьюпорта, они будут работать через размеры вьюпорта в SVG.
+                  В
+                  основном это
+                  значит, что у них уже есть своя реализация медиавыражений к элементам. Как чудесно. Это позволяет нам
+                  контролировать,
+                  как SVG будет выглядеть в любом отображаемом размере.</p>
+              </details>
+            </section>
+
+          </section>
+
+        </div>
+      </section>
+
+    </main>
+
+    @@include('html/footer.html', {})
+
+  </div> <!-- wrapper -->
+  <script src="js/modules/svg.js"></script>
+  <script src="js/app.min.js"></script>
+</body>
+
+</html>

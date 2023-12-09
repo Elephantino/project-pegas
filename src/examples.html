@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+@@include('html/head.html', {
+"title": "examples"
+})
+
+<body>
+  <div class="wrapper">
+    @@include('html/header.html', {})
+
+    <main class="page--main">
+
+      <section class="examples">
+        <div class="container">
+
+          <section>
+
+            <textarea cols="40" rows="20">
+
+<div class="performance"> 
+  
+</div>
+
+  
+<section class="">
+  <details class="show-block ">
+    <summary><code></code></summary>
+  
+  </details>
+</section>
+
+<details class="show-piece">
+  <summary><code></code></summary>
+  
+</details>
+
+</textarea>
+
+          </section>
+
+          <section class="git-init">
+            <pre>
+  <code>
+git init
+git remote add origin http://
+git pull origin main   ===   git pull http://
+
+git add . 
+  git status 
+git commit -m "commit"
+git push origin main   ===   git push http://
+
+git clone http://
+  </code>
+</pre>
+          </section>
+
+
+
+          <div class="examples-html-media-video-wrapper">
+
+            <a name="examples-html-media-video-wrapper">
+              <h2>вставка видео без растраты трафика пользователя</h2>
+            </a>
+
+            <textarea name="video" cols="125" rows="50">
+
+<div class="video-wrapper">    <!-- контейнер для всех видео -->
+
+  <a class="video-wrapper__link" href="https://www.youtube.com/watch?v=ZwtLqMiQwcA">    <!-- при клике заменится на видео -->
+    <picture>         
+      <source srcset="https://i.ytimg.com/vi_webp/ZwtLqMiQwcA/maxresdefault.webp" type="image/webp">
+      <img class="video-wrapper__media" src="https://i.ytimg.com/vi/ZwtLqMiQwcA/maxresdefault.jpg" alt="video">
+    </picture>
+  </a>       <!-- ссылка на случай если что то не так пойдет но контент не пропадет -->
+
+  <button class="video-wrapper__button" aria-label="запустить видео">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 48">
+      <path class="video-wrapper__button-shape"
+        d="M43.2,33.9c-0.4,2.1-2.1,3.7-4.2,4c-3.3,0.5-8.8,1.1-15,1.1c-6.1,
+        0-11.6-0.6-15-1.1c-2.1-0.3-3.8-1.9-4.2-4C4.4,31.6,4,28.2,4,24c0-4.2,
+        0.4-7.6,0.8-9.9c0.4-2.1,2.1-3.7,4.2-4C12.3,9.6,17.8,9,24,9c6.2,0,11.
+        6,0.6,15,1.1c2.1,0.3,3.8,1.9,4.2,4c0.4,2.3,0.9,5.7,0.9,9.9C44,28.2,
+        43.6,31.6,43.2,33.9z">
+      </path>
+      <path class="video-wrapper__button-icon" d="M20 31L20 17 32 24z"></path>
+    </svg>
+  </button>
+
+</div>
+
+--------------------------------------------------------------------------------------------------------
+
+ютуб хранит обложки к видео по адресу:
+
+        i.ytimg.com/vi/ id видео/ разрешение обложки
+        i.ytimg.com/vi_webp/ id видео/ разрешение обложки.webp
+
+https://i.ytimg.com/vi/ZwtLqMiQwcA/maxresdefault.jpg
+https://i.ytimg.com/vi_webp/ZwtLqMiQwcA/maxresdefault.webp
+
+
+качество миниатюры(обложки видео):
+
+maxresdefault.jpg - максимальное  
+hqdefault.jpg     - высокое 
+mqdefault.jpg     - среднее
+sddefault.jpg     - стандартное
+
+--------------------------------------------------------------------------------------------------------
+
+.video-wrapper {
+  position: relative; 
+
+    /* разрешение 16/19   */
+  width: 100%;      
+  height: 0;               
+  padding-bottom: 56.25%;
+
+  background: #000;
+}
+
+.video-wrapper__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-wrapper__button {
+  position: absolute;
+    /* по умолчанию прячем что бы при замене */
+    /* картинки на видео кнопка пряталась */
+  display: none;  
+  border: none;   
+  border: none;
+  height: 48px;
+  width: 68px;
+  padding: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  outline: none;
+}
+
+.video-wrapper--enabled {
+  cursor: pointer;
+}
+
+.video-wrapper--enabled .video-wrapper__button {
+  display: block;
+}
+
+.video-wrapper__button-shape {
+  fill: #212121;
+  fill-opacity: 0.8;
+}
+
+.video-wrapper:hover .video-wrapper__button-shape,
+.video-wrapper__button:focus .video-wrapper__button-shape{
+  fill: tomato;
+  fill-opacity: 1;
+}
+
+.video-wrapper__button-icon {
+  fill: white;
+}
+
+--------------------------------------------------------------------------------------------------------
+
+export function findVideos() {  
+
+let videos = document.querySelectorAll('.video-wrapper');    // находим все видео
+
+  for (let i = 0; i < videos.length; i++) { 
+    setupVideo(videos[i]); 
+  } 
+} 
+
+function setupVideo(video) { 
+  let link = video.querySelector('.video-wrapper__link'); 
+  let media = video.querySelector('.video-wrapper__media'); 
+  let button = video.querySelector('.video-wrapper__button'); 
+  let id = parseMediaURL(media); 
+
+  video.addEventListener('click', ()=> {
+    let iframe = createIframe(id);
+    link.remove(); // при клике после замены удаляется ссылка а вместе с ней и картинка (обложка) и все остальное
+    button.remove();
+    video.appendChild(iframe);
+  });
+
+  link.removeAttribute('href');
+  video.classList.add('video-wrapper--enabled');
+}
+
+function parseMediaURL(media) {
+  let regexp = /https:\/\/i\.ytimg\.com\/vi\/([a-zA-Z0-9_-]+)\/maxresdefault\.jpg/i;
+  let url = media.src;
+  let match = url.match(regexp);
+
+  return match[1];
+}
+
+function createIframe(id) {
+  let iframe = document.createElement('iframe');
+
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('allow', 'autoplay');
+  iframe.setAttribute('src', generateURL(id));
+  iframe.classList.add('video-wrapper__media');
+
+  return iframe;
+}
+
+function generateURL(id) {
+  let query = '?rel=0&showinfo=0&autoplay=1';      // сразу после вставки начнется проигрывание autoplay=1
+
+  return 'https://www.youtube.com/embed/' + id + query;
+}
+
+
+
+findVideos();
+</textarea>
+
+          </div>
+
+          <div class="examples-js-object-for-in">
+
+            <a name="examples-js-object-for-in">
+              <h2>Перебор объекта в цикле for...in</h2>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=eqD7DJVJWOc" target="_blank" rel="noopener noreferrer">Источник
+              этого
+              примера https://www.youtube.com/watch?v=eqD7DJVJWOc</a>
+
+            <pre>
+  <code>
+let arr = [
+  {
+    "original_name": "Fight Club",
+    "russian_name": "Бойцовский клуб",
+    "year": 1999,
+    "actors": [
+      "Эдварт нортан",
+      "Бред Питт",
+      "Хелена Бонем Кратер"
+    ]
+  },
+  {
+    "original_name": "The Mask",
+    "russian_name": "Маска",
+    "year": 1994,
+    "actors": [
+      "Джим Керри",
+      "Камерон Диаз"
+    ]
+  },
+  {
+    "original_name": "Rocky III",
+    "russian_name": "Рокки 3",
+    "year": 1982,
+    "actors": [
+      "Сильвестр Сталоне",
+      "Мистер Ти",
+      "Талия Шайн",
+      "Бёрджесс Мередит"
+    ]
+  },
+]
+
+консоль лог приводит значения к строке
+по этому выражение надо писать в скобках //(i + 1), (k + 1), 
+что бы в результате была не конкатенация => i = 0; + i + 1 + = 01   ======== Фильм №01 ========
+а сам результат который получается в скобках => + (i + 1) + = 1     ======== Фильм №1 ========
+
+for (let i = 0; i < arr.length; i++) {
+  console.log("======== Фильм №" + (i + 1) + " ========"); 
+  for (let j in arr[i]) {                                 
+    if (j == "actors") {                                  
+      for (let k = 0; k < arr[i][j].length; k++) {        
+        console.log("Актёр " + (k + 1) + ": " + arr[i][j][k]);
+      }
+    } else if (j == "original_name") {
+      console.log("Оригинальное название: " + arr[i][j]);
+    } else if (j == "russian_name") {
+      console.log("Русское название: " + arr[i][j]);
+    } else if (j == "year") {
+      console.log("Год: " + arr[i][j]);
+    }
+  }
+}
+
+
+======== Фильм №1 ========
+js.js:71 Оригинальное название: Fight Club
+js.js:73 Русское название: Бойцовский клуб
+js.js:75 Год: 1999
+js.js:68 Актёр 1: Эдварт нортан
+js.js:68 Актёр 2: Бред Питт
+js.js:68 Актёр 3: Хелена Бонем Кратер
+js.js:64 ======== Фильм №2 ========
+js.js:71 Оригинальное название: The Mask
+js.js:73 Русское название: Маска
+js.js:75 Год: 1994
+js.js:68 Актёр 1: Джим Керри
+js.js:68 Актёр 2: Камерон Диаз
+js.js:64 ======== Фильм №3 ========
+js.js:71 Оригинальное название: Rocky III
+js.js:73 Русское название: Рокки 3
+js.js:75 Год: 1982
+js.js:68 Актёр 1: Сильвестр Сталоне
+js.js:68 Актёр 2: Мистер Ти
+js.js:68 Актёр 3: Талия Шайн
+js.js:68 Актёр 4: Бёрджесс Мередит
+  </code>
+</pre>
+          </div>
+
+          <div class="examples-js-object-for-of">
+
+            <a name="examples-js-object-for-of">
+              <h2>Обход коллекции элементов циклом for...of</h2>
+            </a>
+
+            <pre>
+  <code>
+&lt;button&gt;button-1&lt;/button&gt;
+&lt;button&gt;button-2&lt;/button&gt;
+&lt;button&gt;button-3&lt;/button&gt;
+
+let buttons = document.querySelectorAll('button');
+
+for (let button of buttons) {
+  button.onclick = f1;
+}
+
+function f1() {
+  console.log(this); //this укажет конкретный эдемент в консоли
+}
+
+console:
+
+//&lt;button&gt;button-1&lt;/button&gt;
+//&lt;button&gt;button-2&lt;/button&gt;
+//&lt;button&gt;button-3&lt;/button&gt;
+
+  </code>
+</pre>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    @@include('html/footer.html', {})
+    <!-- <script src="js/main.js"></script> -->
+  </div>
+</body>
+
+</html>
